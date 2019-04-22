@@ -1,0 +1,11 @@
+<div padding flex-cell default-cell-6 gutter>
+    <form [formGroup]="form">
+        <quick-form-field *ngFor="let field of fields"
+                          [field]="field"
+                          [form]="form">
+        </quick-form-field>
+    </form>
+    <div>
+        <pre no-margin><code [highlight]="values"></code></pre>
+    </div>
+</div>

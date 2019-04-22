@@ -4,6 +4,7 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "strict": true,
     "declaration": false,
     "module": "es2015",
     "moduleResolution": "node",
@@ -17,6 +18,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-quick-form": [
+        "dist/ng-quick-form"
+      ],
+      "ng-quick-form/*": [
+        "dist/ng-quick-form/*"
+      ]
+    }
   }
 }
