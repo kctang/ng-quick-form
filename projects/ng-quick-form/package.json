@@ -1,10 +1,10 @@
 {
   "name": "ng-quick-form",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simplify usage of Angular forms with Angular Material for common use cases.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kctang/ng-quick-form.git"
+    "url": "https://github.com/kctang/ng-quick-form.git"
   },
   "keywords": [
     "quick form",
