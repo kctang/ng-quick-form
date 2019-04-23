@@ -27,13 +27,22 @@ export type QuickFormField = {
   value?: any | any[]
 
   /**
-   * List of possible options for 'radio', 'checkbox' and 'select' field types. Options can be
-   * specified as an "array of string" or an "array of object with 'value' and 'label' as
-   * keys". Optional.
+   * List of possible options for 'radio', 'checkbox', 'chips' and 'select' field types.
+   *
+   * Note: While some field types allow different values for display (label) and form data
+   * (value), 'chip' type uses label for both display and as form data.
+   *
+   * Options can be specified as:
+   * <li> array of string</li>
+   * <li> array of object with 'value' and 'label' as keys</li>
+   * <li> array of object with 'group' and 'options' as keys (see type definition)</li>
+   *
+   * Optional.
    */
   options?: (
     string |
     { value: any, label: string } |
+    { group: string, options: string[] } |
     { group: string, options: { value: any, label: string }[] }
     )[]
 
@@ -41,6 +50,11 @@ export type QuickFormField = {
    * Flag to indicate that field input is required. Optional. Defaults to false.
    */
   required?: boolean
+
+  /**
+   * For 'select' field type, true to allow multiple selection.
+   */
+  selectMultiple?: boolean
 
   /**
    * Array of Angular validation functions (i.e. ValidatorFn). Optional.

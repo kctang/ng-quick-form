@@ -1,7 +1,7 @@
 import { AbstractControl } from '@angular/forms'
 
 export const getErrorMessage = (control: AbstractControl) => {
-  if (control.touched && control.invalid && control.errors) {
+  if (control.errors && !control.pristine) {
     const messages = Object.keys(control.errors).map(key => {
       const obj = control.getError(key)
       switch (key) {

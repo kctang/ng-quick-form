@@ -14,27 +14,42 @@ export const makeForm = (fields: QuickFormField[]) => {
   setDefaultValues(fields)
 
   fields.map(field => {
-    if (field.type === 'checkbox') {
-      // will always be options2 type because of #conversion
-      const options2 = field.options as { value: string, label: string }[] || []
-      const options = options2.map(option => {
-        const values = Array.isArray(field.value) ? field.value : [ field.value ]
-        return fb.group({
-          checkboxItem: [ values.indexOf(option.value) !== -1 ? option.value : '' ]
-        })
-      })
-      form[ field.id! ] = fb.array(options, [
-        ...(field.validators) || []
-      ], [
-        ...(field.asyncValidators) || []
-      ])
-    } else {
-      // single control field
-      form[ field.id! ] = [ field.value || '', [
-        ...(field.validators || [])
-      ], [
-        ...(field.asyncValidators || [])
-      ] ]
+    const fieldId = field.id!
+
+    switch (field.type) {
+      case 'separator':
+        // _ indicates field value is not returned to user
+        form[ `__separator-${field.id}` ] = [ '' ]
+        break
+      case 'checkbox':
+        // validators not added to internal field
+        form[ fieldId ] = [ field.value ]
+
+        // checkbox is backed by additional fields
+        if (field.type === 'checkbox') {
+          const options2 = field.options as { value: string, label: string }[]
+
+          const options = options2.map(option => {
+            const checked = field.value.indexOf(option.value) !== -1
+            return fb.group({
+              cb: [ checked ]
+            })
+          })
+
+          // validators added to array instead
+          form[ `__cb-${fieldId}` ] = fb.array(options,
+            [ ...(field.validators || []) ],
+            [ ...(field.asyncValidators || []) ]
+          )
+        }
+        break
+
+      default:
+        form[ fieldId ] = [ field.value || '', [
+          ...(field.validators || [])
+        ], [
+          ...(field.asyncValidators || [])
+        ] ]
     }
   })
 

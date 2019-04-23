@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -9,8 +9,8 @@ import {
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms'
 import { QuickFormField } from '../QuickFormField'
 import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material'
-import { of, Observable } from 'rxjs'
-import { map, startWith, tap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { map, startWith } from 'rxjs/operators'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { BaseComponent } from '../util/BaseComponent'
 import { getErrorMessage } from '../util/getErrorMessage'
@@ -40,6 +40,10 @@ export class QuickFormFieldComponent extends BaseComponent implements OnInit {
   chipWithGroups = false
   filteredChipValuesWithGroup!: Observable<{ group: string, options: { value: any, label: string }[] }[]>
   filteredChipValues!: Observable<{ value: any, label: string }[]>
+
+  constructor (private cd: ChangeDetectorRef) {
+    super()
+  }
 
   ngOnInit (): void {
     if (this.field.type === 'chips') {
@@ -85,6 +89,20 @@ export class QuickFormFieldComponent extends BaseComponent implements OnInit {
   getOptionLabel (i: number) {
     const option = this.field.options![ i ] as { label: string }
     return option.label
+  }
+
+  doUpdateCb (i: number, checked: boolean) {
+    // update field that stores checkbox values that will be returned to user
+    const option = this.field.options![ i ] as { value: any, label: string }
+    const control = this.form.get(this.fieldId) as FormControl
+    const values = new Set(control.value)
+    if (checked) {
+      values.add(option.value)
+    } else {
+      values.delete(option.value)
+    }
+    control.setValue(Array.from(values))
+    this.cd.markForCheck()
   }
 
   doAddChip (event: MatChipInputEvent) {

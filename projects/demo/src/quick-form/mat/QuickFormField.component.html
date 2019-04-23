@@ -1,6 +1,6 @@
 <ng-container [formGroup]="form" [ngSwitch]="field.type">
     <!--text field-->
-    <mat-form-field *ngSwitchCase="'text'">
+    <mat-form-field *ngSwitchCase="'text'" width-full>
         <input matInput [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -9,7 +9,7 @@
     </mat-form-field>
 
     <!--password-->
-    <mat-form-field *ngSwitchCase="'password'">
+    <mat-form-field *ngSwitchCase="'password'" width-full>
         <input matInput type="password" [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -18,7 +18,7 @@
     </mat-form-field>
 
     <!--textarea-->
-    <mat-form-field *ngSwitchCase="'textarea'">
+    <mat-form-field *ngSwitchCase="'textarea'" width-full>
         <textarea matInput cdkTextareaAutosize [formControlName]="fieldId"
                   [placeholder]="field.title" [required]="field.required">
         </textarea>
@@ -27,44 +27,8 @@
         </mat-error>
     </mat-form-field>
 
-    <!--switch field-->
-    <div *ngSwitchCase="'switch'" typography-body-1>
-        <mat-slide-toggle [formControlName]="fieldId">{{field.title}}</mat-slide-toggle>
-    </div>
-
-    <!--radio field-->
-    <mat-radio-group *ngSwitchCase="'radio'" [formControlName]="fieldId"
-                     [required]="field.required">
-        <label typography-caption>{{field.title}}</label>
-        <div flex-cell gutter padding-bottom>
-            <mat-radio-button *ngFor="let option of field.options" [value]="option.value" cell-2>
-                {{option.label}}
-            </mat-radio-button>
-        </div>
-        <mat-error *ngIf="submitted && !form.controls[fieldId].valid">
-            {{errorMessage(form.controls[fieldId])}}
-        </mat-error>
-    </mat-radio-group>
-
-    <!--checkbox-->
-    <div *ngSwitchCase="'checkbox'" padding-bottom>
-        <label typography-caption>{{field.title}}</label>
-        <div [formArrayName]="fieldId" flex-cell gutter>
-            <ng-container *ngFor="let control of getChildControls(fieldId); let i = index">
-                <ng-container [formGroupName]="i">
-                    <mat-checkbox formControlName="checkboxItem" [value]="getOptionValue(i)" cell-2>
-                        {{getOptionLabel(i)}}
-                    </mat-checkbox>
-                </ng-container>
-            </ng-container>
-        </div>
-        <mat-error *ngIf="!form.controls[fieldId].valid">
-            {{errorMessage(form.controls[fieldId])}}
-        </mat-error>
-    </div>
-
     <!--chip-->
-    <mat-form-field *ngSwitchCase="'chips'">
+    <mat-form-field *ngSwitchCase="'chips'" width-full>
         <mat-chip-list #chipList>
             <mat-chip
                     *ngFor="let chipValue of chipValues"
@@ -105,9 +69,9 @@
     </mat-form-field>
 
     <!--select-->
-    <mat-form-field *ngSwitchCase="'select'">
+    <mat-form-field *ngSwitchCase="'select'" width-full>
         <mat-select [formControlName]="fieldId" [placeholder]="field.title"
-                    [multiple]="true"
+                    [multiple]="field.selectMultiple"
                     [required]="field.required">
             <mat-option *ngFor="let option of field.options" [value]="option.value">
                 {{option.label}}
@@ -118,13 +82,53 @@
         </mat-error>
     </mat-form-field>
 
+    <!--switch field-->
+    <div *ngSwitchCase="'switch'" typography-body-1 width-full>
+        <mat-slide-toggle [formControlName]="fieldId">{{field.title}}</mat-slide-toggle>
+    </div>
+
+    <!--radio field-->
+    <div *ngSwitchCase="'radio'" width-full>
+        <mat-radio-group [formControlName]="fieldId" [required]="field.required">
+            <label typography-caption>{{field.title}}</label>
+            <div flex-cell gutter padding-bottom>
+                <mat-radio-button *ngFor="let option of field.options" [value]="option.value"
+                                  cell-2>
+                    {{option.label}}
+                </mat-radio-button>
+            </div>
+            <div qff-error *ngIf="!form.controls[fieldId].valid">
+                {{errorMessage(form.controls[fieldId])}}
+            </div>
+        </mat-radio-group>
+    </div>
+
+    <!--checkbox-->
+    <div *ngSwitchCase="'checkbox'" padding-bottom width-full>
+        <label typography-caption>{{field.title}}</label>
+        <div [formArrayName]="'__cb-' + fieldId" flex-cell gutter>
+            <ng-container
+                    *ngFor="let control of getChildControls('__cb-' + fieldId); let i = index">
+                <ng-container [formGroupName]="i">
+                    <mat-checkbox formControlName="cb" #cb [value]="getOptionValue(i)"
+                                  (change)="doUpdateCb(i, cb.checked)" cell-2>
+                        {{getOptionLabel(i)}}
+                    </mat-checkbox>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div qff-error *ngIf="!form.controls['__cb-' + fieldId].valid">
+            {{errorMessage(form.controls['__cb-' + fieldId])}}
+        </div>
+    </div>
+
     <!--separator-->
-    <div *ngSwitchCase="'separator'" padding-vertical>
+    <div *ngSwitchCase="'separator'" padding-vertical width-full>
         <label typography-body-2>{{field.title}}</label>
         <div divider></div>
     </div>
 
-    <div *ngSwitchDefault red padding-bottom>
+    <div *ngSwitchDefault red padding-bottom width-full>
         Unsupported form field type [{{field.type}}]
     </div>
 </ng-container>

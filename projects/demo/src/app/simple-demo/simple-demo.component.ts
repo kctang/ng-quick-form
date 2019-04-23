@@ -3,8 +3,8 @@ import { FormGroup, Validators } from '@angular/forms'
 import { QuickFormField } from '../../quick-form/QuickFormField'
 import { QuickForm } from '../../quick-form/QuickForm'
 import { BaseComponent } from '../../quick-form/util/BaseComponent'
-import { ArrayValidators } from '../../quick-form/validators/ArrayValidators'
 import { tap } from 'rxjs/operators'
+import { CheckboxValidators } from '../../quick-form/validators/CheckboxValidators'
 
 @Component({
   selector: 'app-simple-demo',
@@ -26,31 +26,41 @@ export class SimpleDemoComponent extends BaseComponent implements OnInit {
     {
       title: 'Experience 1', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
-      validators: [ ArrayValidators.minSelectedValues(2) ],
+      validators: [ CheckboxValidators.minSelectedValues(2) ],
       value: 'Angular'
     },
     {
-      title: 'Experience 2', type: 'chips',
+      title: 'Hobbies', type: 'chips'
+    },
+    {
+      title: 'Series/Movies', type: 'chips',
       options: [
         {
-          group: 'JavaScript',
+          group: 'TV Series',
           options: [
-            { value: 'React', label: 'React' },
-            { value: 'Angular', label: 'Angular' },
-            { value: 'Vue', label: 'Vue' },
-            { value: 'Ember.js', label: 'Ember.js' },
-            { value: 'jQuery', label: 'jQuery' }
+            'Game of Thrones',
+            'Black Summer',
+            'Chilling Adventures of Sabrina',
+            'Star Trek: Discovery',
+            'The Act',
+            'The Walking Dead',
+            'Line of Duty'
           ]
         }, {
-          group: 'Java',
+          group: 'Movies',
           options: [
-            { value: 'SpringMVC', label: 'SpringMVC' },
-            { value: 'Wicket', label: 'Wicket' },
-            { value: 'JSF', label: 'JSF' }
+            'Avengers: Infinity War',
+            'Deadpool 2',
+            'Solo: A Star Wars Story',
+            'Ocean\'s 8',
+            'Hereditary',
+            'Incredibles 2',
+            'Jurassic World: Fallen Kingdom',
+            'Sicario 2: Soldado'
           ]
         }
       ],
-      value: [ 'Vue', 'jQuery' ]
+      value: [ 'Game of Thrones' ]
     },
     {
       title: 'Prefers', type: 'radio', required: true,
@@ -83,6 +93,10 @@ export class SimpleDemoComponent extends BaseComponent implements OnInit {
   }
 
   get values () {
-    return JSON.stringify(QuickForm.preProcessFormValues(this.form.value, this.fields), null, 2)
+    return JSON.stringify(QuickForm.preProcessFormValues(this.form.value), null, 2)
+  }
+
+  get valid () {
+    return this.form.valid
   }
 }
