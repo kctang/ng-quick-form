@@ -1,6 +1,22 @@
 {
   "name": "ng-quick-form",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Simplify usage of Angular forms with Angular Material for common use cases.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kctang/ng-quick-form.git"
+  },
+  "keywords": [
+    "quick form",
+    "form",
+    "reactive form",
+    "Angular form",
+    "Angular",
+    "Angular Material"
+  ],
+  "author": "kctang@big2.net",
+  "license": "MIT",
+  "homepage": "https://ng-quick-form.surge.sh/",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0",

@@ -1,24 +1,12 @@
-# NgQuickForm
+# ng-quick-form
+[![npm](https://img.shields.io/npm/v/ng-quick-form.svg)](https://www.npmjs.com/package/ng-quick-form)
+![license](https://img.shields.io/github/license/kctang/ng-quick-form.svg)
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+> Simplify usage of Angular forms with Angular Material for common use cases. 
 
-## Code scaffolding
+[ [Documentation & Demos](https://ng-quick-form.surge.sh) | 
+[StackBlitz Template](https://stackblitz.com/edit/ng-quick-form) ]
 
-Run `ng generate component component-name --project ng-quick-form` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-quick-form`.
-> Note: Don't forget to add `--project ng-quick-form` or else it will be added to the default project in your `angular.json` file. 
+## License
 
-## Build
-
-Run `ng build ng-quick-form` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ng-quick-form`, go to the dist folder `cd dist/ng-quick-form` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ng-quick-form` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+MIT
