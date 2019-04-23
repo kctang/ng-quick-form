@@ -1,27 +1,42 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
+import { BaseComponent } from '../../quick-form/util/BaseComponent'
 import { FormGroup, Validators } from '@angular/forms'
 import { QuickFormField } from '../../quick-form/QuickFormField'
+import { CheckboxValidators } from '../../quick-form/validators/CheckboxValidators'
 import { QuickForm } from '../../quick-form/QuickForm'
-import { BaseComponent } from '../../quick-form/util/BaseComponent'
+
 @Component({
-  selector: 'app-simple-demo',
-  templateUrl: 'simple-demo.component.html',
+  selector: 'app-field-types-demo',
+  templateUrl: './field-types-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimpleDemoComponent extends BaseComponent implements OnInit {
+export class FieldTypesDemoComponent extends BaseComponent implements OnInit {
   form!: FormGroup
   fields: QuickFormField[] = [
     {
-      title: 'Name', validators: [
+      title: 'Name', required: true,
+      validators: [
         Validators.minLength(3),
         Validators.maxLength(10)
       ]
     },
+    { title: 'Hungry?', type: 'switch' },
+    { title: 'Programming Questions', type: 'separator' },
     {
       title: 'Front End', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
+      validators: [ CheckboxValidators.minSelectedValues(1) ],
       value: 'Angular'
     },
+    {
+      title: 'Real Programming Languages', type: 'chips',
+      options: [ 'PHP', 'Cobol', 'Java', '.NET', 'C', 'C++' ]
+    },
+    {
+      title: 'Prefers', type: 'radio', required: true,
+      options: [ 'Front End', 'Back End', 'Full Stack', 'Whatever' ]
+    },
+    { title: 'Entertainment', type: 'separator' },
     {
       title: 'Series/Movies', type: 'chips',
       value: [ 'Game of Thrones' ],
@@ -51,6 +66,27 @@ export class SimpleDemoComponent extends BaseComponent implements OnInit {
           ]
         }
       ]
+    },
+    {
+      title: 'Oscar Nominees', type: 'select', selectMultiple: true, required: true,
+      options: [
+        'Avengers: Infinity War',
+        'Deadpool 2',
+        'Solo: A Star Wars Story',
+        'Ocean\'s 8'
+      ]
+    },
+    {
+      title: 'Winner', type: 'select', required: true,
+      options: [
+        'Avengers: Infinity War',
+        'Deadpool 2',
+        'Solo: A Star Wars Story',
+        'Ocean\'s 8'
+      ]
+    },
+    {
+      title: 'Comments', type: 'textarea'
     }
   ]
 

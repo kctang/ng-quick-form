@@ -16,8 +16,8 @@ export type QuickFormField = {
   id?: string
 
   /**
-   * Field type. Valid values are 'text', 'textarea', 'switch', 'radio', 'checkbox', 'select' and
-   * 'password'. Optional. Defaults to 'text'.
+   * Field type. Valid values are 'checkbox', 'chips', 'password', 'radio', 'select', 'separator',
+   * 'switch', 'text' and 'textarea'. Optional. Defaults to 'text'.
    */
   type?: QuickFormFieldType
 

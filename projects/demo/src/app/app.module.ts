@@ -5,13 +5,20 @@ import { AppComponent } from './app.component'
 import { QuickFormModule } from '../quick-form/QuickForm.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatButtonModule, MatTabsModule } from '@angular/material'
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatIconModule,
+  MatTabsModule,
+  MatTooltipModule
+} from '@angular/material'
 import { SimpleDemoComponent } from './simple-demo/simple-demo.component'
 import { HighlightModule } from 'ngx-highlightjs'
 import { SafeHtmlPipe } from './SafeHtmlPipe'
 import scss from 'highlight.js/lib/languages/scss'
 import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
+import { FieldTypesDemoComponent } from './field-types-demo/field-types-demo.component'
 
 export function hljsLanguages () {
   return [
@@ -25,7 +32,8 @@ export function hljsLanguages () {
   declarations: [
     AppComponent,
     SimpleDemoComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    FieldTypesDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +41,14 @@ export function hljsLanguages () {
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    QuickFormModule,
     MatButtonModule,
+    MatIconModule,
+    QuickFormModule,
     HighlightModule.forRoot({
       languages: hljsLanguages
-    })
+    }),
+    MatTooltipModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

@@ -1,0 +1,15 @@
+<div padding>
+    <div flex-cell default-cell-6 gutter>
+        <form [formGroup]="form">
+            <quick-form-field *ngFor="let field of fields" [field]="field" [form]="form">
+            </quick-form-field>
+        </form>
+        <div>
+            <div *ngIf="valid; else invalid" green>Form is valid.</div>
+            <ng-template #invalid>
+                <div red>Form is not valid.</div>
+            </ng-template>
+            <pre no-margin><code [highlight]="values"></code></pre>
+        </div>
+    </div>
+</div>

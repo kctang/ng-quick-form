@@ -31,5 +31,7 @@ $demo-theme: mat-light-theme($demo-primary, $demo-accent, $demo-warn);
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@import '~highlight.js/styles/github.css';
+
 @import '~common-style-attributes/styles/common-style-attributes';
 @import '~common-style-attributes/styles/csa-typography';

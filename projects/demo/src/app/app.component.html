@@ -1,45 +1,143 @@
-<div typography-body-1>
-    <div padding>
+<div padding typography-body-1>
+    <div flex-cell gutter>
+        <div shrink typography-title>ng-quick-form</div>
+        <a shrink href="https://www.npmjs.com/package/ng-quick-form"><img
+                src="https://img.shields.io/npm/v/ng-quick-form.svg"></a>
+        <a shrink href="http://github.com/kctang/ng-quick-form"><img
+                src="https://img.shields.io/github/license/kctang/ng-quick-form.svg"></a>
+    </div>
+    <p>
+        Quick form was designed to let Angular developers declare form fields to collect data
+        for common use cases easily.
+    </p>
+    <p>
+        Where possible, it uses Angular's form capabilities (e.g. validation, reactive form
+        capabilities) to retain familiarity.
+    </p>
+    <div divider margin-vertical></div>
+    <div typography-headline>Getting Started</div>
+
+    <ul>
+        <li>This library was designed for Angular 7+ and uses Angular Material to display form
+            fields, so you will need a project with these dependencies configured.
+        </li>
+        <li>To install this library from NPM:
+            <div padding background-grey><code>npm install ng-quick-form</code></div>
+        </li>
+        <li>Understand the key concepts listed below, review the demo and code.</li>
+        <li>Check out the demos, and start tweaking them in your projects.</li>
+    </ul>
+
+    <div typography-subheading-1>Key Concepts:</div>
+    <ol>
+        <li>
+            <code>QuickFormModule</code>
+            <div>
+                Register this module in your Angular application.
+            </div>
+        </li>
+        <li padding-top>
+            <code>QuickFormField</code>
+            <div>
+                Definition for a form field. A form basically constructed from an array
+                of fields. Granted, this approach has limitations when it comes to complex forms.
+                However, that is not the scope of this library. The objective is to make typical
+                form usage really really simple. For the rest, you can always fallback to
+                Angular's FormBuilder.
+            </div>
+            <div padding-top flex-cell default-cell-6 gutter>
+                <div>
+                    <pre no-margin height-300 style="overflow: auto"><code
+                            [highlight]="code.quickFormField"></code></pre>
+                </div>
+                <div>
+                    <pre no-margin height-300 style="overflow: auto"><code
+                            [highlight]="code.quickFormFieldType"></code></pre>
+                </div>
+            </div>
+        </li>
+        <li padding-top>
+            <code>QuickForm.makeForm(fields: QuickFormField[]): FormGroup</code>
+            <div>
+                This function is used to create a standard Angular FormGroup based on an array of
+                field definitions.
+            </div>
+        </li>
+        <li padding-top>
+            <code>&lt;quick-form-field&gt;</code>
+            <div>
+                This component is used to render form fields. Typical usage is to iterate through
+                form fields and render each field.
+                <div padding background-grey>
+                    <pre>&lt;quick-form-field *ngFor="let field of fields" [field]="field" [form]="form"&gt; &lt;/quick-form-field&gt;</pre>
+                </div>
+            </div>
+        </li>
+        <li padding-top>
+            <code>QuickForm.preProcessFormValues(formValues: any)</code>
+            <div>
+                Use this function to convert form values to a structure based on field definitions.
+                It should be called before processing form's JSON data.
+            </div>
+            <div><i>Why is this needed?</i> Some field types are rendered as multiple form
+                controls. For example, checkbox type is represented as a FormArray with multiple
+                FormGroups. The main FormGroup's value contains values from these intermediate
+                controls.
+            </div>
+        </li>
+    </ol>
+    <div divider margin-vertical></div>
+    <div typography-headline>Demos</div>
+    <!--simple demo-->
+    <div flex-cell default-cell-12>
         <div flex-cell gutter>
-            <div shrink typography-headline>ng-quick-form</div>
-            <a shrink href="https://www.npmjs.com/package/ng-quick-form"><img
-                    src="https://img.shields.io/npm/v/ng-quick-form.svg"></a>
-            <a shrink href="http://github.com/kctang/ng-quick-form"><img
-                    src="https://img.shields.io/github/license/kctang/ng-quick-form.svg"></a>
+            <div grow bottom typography-subheading-1>Simple Demo</div>
+            <div shrink>
+                <mat-button-toggle-group>
+                    <mat-button-toggle #simpleDemoDemo [checked]="true">View Demo
+                    </mat-button-toggle>
+                    <mat-button-toggle #simpleDemoSource>View Source</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
         </div>
-        <p>
-            Create forms to collect data quickly.
-        </p>
-        <div divider margin-vertical></div>
-        <div typography-subheading-1>Getting Started</div>
-        <div>
-            <ul>
-                <li>Install from NPM:
-                    <p><code>npm install ng-quick-form</code></p>
-                </li>
-                <li>TODO: ...then?</li>
-            </ul>
+        <app-simple-demo background-yellow *ngIf="simpleDemoDemo.checked"></app-simple-demo>
+        <mat-tab-group *ngIf="simpleDemoSource.checked">
+            <mat-tab label="HTML">
+                <pre no-margin><code [highlight]="code.simpleDemo.html"></code></pre>
+            </mat-tab>
+            <mat-tab label="TypeScript">
+                <pre no-margin><code [highlight]="code.simpleDemo.ts"></code></pre>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div divider margin-vertical></div>
+
+    <!--field types demo-->
+    <div flex-cell default-cell-12>
+        <div flex-cell gutter>
+            <div grow bottom typography-subheading-1>Field Types Demo</div>
+            <div shrink>
+                <mat-button-toggle-group>
+                    <mat-button-toggle #fieldTypesDemo [checked]="true">View Demo
+                    </mat-button-toggle>
+                    <mat-button-toggle #fieldTypesSource>View Source</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
         </div>
-        <div padding>
-            [ <a href="https://stackblitz.com/edit/ng-quick-form-starter">StackBlitz
-            Template</a> ]
-        </div>
+        <app-field-types-demo background-yellow
+                              *ngIf="fieldTypesDemo.checked"></app-field-types-demo>
+        <mat-tab-group *ngIf="fieldTypesSource.checked">
+            <mat-tab label="HTML">
+                <pre no-margin><code [highlight]="code.fieldTypes.html"></code></pre>
+            </mat-tab>
+            <mat-tab label="TypeScript">
+                <pre no-margin><code [highlight]="code.fieldTypes.ts"></code></pre>
+            </mat-tab>
+        </mat-tab-group>
     </div>
     <div divider></div>
-    <mat-tab-group>
-        <mat-tab label="Basic Usage">
-            <app-simple-demo></app-simple-demo>
-        </mat-tab>
-        <mat-tab label="Two-Column Form">
-            <app-simple-demo></app-simple-demo>
-        </mat-tab>
-        <mat-tab label="Integrate with Existing FormGroup">
-            <app-simple-demo></app-simple-demo>
-        </mat-tab>
-    </mat-tab-group>
-    <div divider></div>
     <div padding>
-        <div typography-subheading-1>Source Code</div>
+        <div typography-headline>Source Code</div>
         <a href="https://github.com/kctang/ng-quick-form">ng-quick-form</a> is
         hosted on GitHub.
     </div>

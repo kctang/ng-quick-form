@@ -1,10 +1,13 @@
+/**
+ * Support field types.
+ */
 export type QuickFormFieldType =
-  'text' |
-  'textarea' |
-  'switch' |
-  'radio' |
-  'checkbox' |
-  'chips' |
-  'select' |
-  'password' |
-  'separator'
+  'checkbox'
+  | 'chips'
+  | 'password'
+  | 'radio'
+  | 'select'
+  | 'separator'
+  | 'switch'
+  | 'text'
+  | 'textarea'
