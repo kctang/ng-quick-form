@@ -3,7 +3,7 @@
  *
  * @param fields
  */
-import { QuickFormField } from '../QuickFormField'
+import { QuickFormField } from './QuickFormField'
 
 /**
  * https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case

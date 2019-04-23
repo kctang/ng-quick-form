@@ -3,7 +3,7 @@
  *
  * @param fields
  */
-import { QuickFormField } from '../QuickFormField'
+import { QuickFormField } from './QuickFormField'
 import { FormBuilder } from '@angular/forms'
 import { setDefaultValues } from './setDefaultValues'
 

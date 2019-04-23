@@ -11,8 +11,8 @@ import {
   MatSelectModule,
   MatSlideToggleModule
 } from '@angular/material'
-import { QuickFormFieldComponent } from './mat/QuickFormField.component'
 import { CommonModule } from '@angular/common'
+import { QuickFormFieldComponent } from './mat/QuickFormField.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +22,6 @@ import { CommonModule } from '@angular/common'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,
@@ -40,5 +39,6 @@ import { CommonModule } from '@angular/common'
     QuickFormFieldComponent
   ]
 })
+// @dynamic
 export class QuickFormModule {
 }

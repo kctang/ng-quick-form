@@ -1,7 +1,6 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component,
-  ElementRef,
+  ChangeDetectionStrategy,
+  Component, ElementRef,
   Input,
   OnInit,
   ViewChild
@@ -12,7 +11,6 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent } from
 import { Observable } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
-import { BaseComponent } from '../util/BaseComponent'
 import { getErrorMessage } from '../util/getErrorMessage'
 import { assert } from '../util/assert'
 
@@ -22,7 +20,7 @@ import { assert } from '../util/assert'
   styleUrls: [ './QuickFormField.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuickFormFieldComponent extends BaseComponent implements OnInit {
+export class QuickFormFieldComponent implements OnInit {
   @Input()
   form!: FormGroup
 
@@ -40,10 +38,6 @@ export class QuickFormFieldComponent extends BaseComponent implements OnInit {
   chipWithGroups = false
   filteredChipValuesWithGroup!: Observable<{ group: string, options: { value: any, label: string }[] }[]>
   filteredChipValues!: Observable<{ value: any, label: string }[]>
-
-  constructor (private cd: ChangeDetectorRef) {
-    super()
-  }
 
   ngOnInit (): void {
     if (this.field.type === 'chips') {
@@ -102,7 +96,6 @@ export class QuickFormFieldComponent extends BaseComponent implements OnInit {
       values.delete(option.value)
     }
     control.setValue(Array.from(values))
-    this.cd.markForCheck()
   }
 
   doAddChip (event: MatChipInputEvent) {

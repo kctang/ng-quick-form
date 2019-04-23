@@ -1,5 +1,5 @@
 /**
- * Support field types.
+ * Supported field types.
  */
 export type QuickFormFieldType =
   'checkbox'

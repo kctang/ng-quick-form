@@ -1,16 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { BaseComponent } from '../../quick-form/util/BaseComponent'
 import { FormGroup, Validators } from '@angular/forms'
-import { QuickFormField } from '../../quick-form/QuickFormField'
-import { CheckboxValidators } from '../../quick-form/validators/CheckboxValidators'
-import { QuickForm } from '../../quick-form/QuickForm'
+import { QuickForm, QuickFormField, CheckboxValidators } from 'ng-quick-form'
 
 @Component({
   selector: 'app-field-types-demo',
   templateUrl: './field-types-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FieldTypesDemoComponent extends BaseComponent implements OnInit {
+export class FieldTypesDemoComponent implements OnInit {
   form!: FormGroup
   fields: QuickFormField[] = [
     {

@@ -6,14 +6,68 @@
         <a shrink href="http://github.com/kctang/ng-quick-form"><img
                 src="https://img.shields.io/github/license/kctang/ng-quick-form.svg"></a>
     </div>
-    <p>
-        Quick form was designed to let Angular developers declare form fields to collect data
-        for common use cases easily.
-    </p>
-    <p>
-        Where possible, it uses Angular's form capabilities (e.g. validation, reactive form
-        capabilities) to retain familiarity.
-    </p>
+    <div padding-vertical>
+        Simplify usage of Angular forms with Angular Material for common use cases.
+    </div>
+    <div padding-bottom>
+        Instead of using FormGroup, FormArray and FormControl objects directly to define form
+        structure, this library uses <code>QuickFormField</code> to declare form fields. It provides
+        <code>&lt;quick-form-field&gt;</code> component to render fields, complete with
+        validation and error message handling.
+    </div>
+    <div>
+        Supported field types:
+    </div>
+    <ul>
+        <li><code>checkbox</code>
+            <div>
+                A field that displays multiple checkboxes, allowing user to select one or more
+                option. Result of selection is returned as a single array value (instead of one
+                value per checkbox control).
+            </div>
+        </li>
+        <li><code>chips</code>
+            <div>
+                A field that display a list of values as individual, keyboard accessible, chips.
+                While users can type any chip value, it also supports auto-completion via a list of
+                options. In addition, the options can be categorized/grouped (see demo).
+            </div>
+        </li>
+        <li><code>password</code>
+            <div>
+                A password field.
+            </div>
+        </li>
+        <li><code>radio</code>
+            <div>
+                A field that renders radio buttons based on options specified.
+            </div>
+        </li>
+        <li><code>select</code>
+            <div>
+                A field that lets user select a value based on a list of options. It also supports
+                multiple selection via the <code>selectMultiple</code> property.
+            </div>
+        </li>
+        <li><code>separator</code>
+            <div>
+                This is not a field to collect data. It displays a separator using the field title.
+            </div>
+        </li>
+        <li><code>switch</code>
+            <div>A field that displays an Angular Material "slide toggle" control.</div>
+        </li>
+        <li><code>text</code>
+            <div>
+                A text field.
+            </div>
+        </li>
+        <li><code>textarea</code>
+            <div>
+                A text field that supports multiple lines.
+            </div>
+        </li>
+    </ul>
     <div divider margin-vertical></div>
     <div typography-headline>Getting Started</div>
 
