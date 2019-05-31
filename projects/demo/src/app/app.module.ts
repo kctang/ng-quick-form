@@ -4,12 +4,10 @@ import { NgModule } from '@angular/core'
 import { AppComponent } from './app.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatTabsModule,
-  MatTooltipModule
-} from '@angular/material'
+import { MatButtonModule } from '@angular/material/button'
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { SimpleDemoComponent } from './simple-demo/simple-demo.component'
 import { HighlightModule } from 'ngx-highlightjs'
 import { SafeHtmlPipe } from './SafeHtmlPipe'
