@@ -29,9 +29,9 @@ export class QuickFormFieldComponent implements OnInit {
 
   separatorKeysCodes: number[] = [ ENTER, COMMA ]
 
-  @ViewChild('chipInput')
+  @ViewChild('chipInput', { static: false })
   chipInput!: ElementRef<HTMLInputElement>
-  @ViewChild('auto')
+  @ViewChild('auto', { static: false })
   matAutocomplete!: MatAutocomplete
   chipControl = new FormControl()
   chipValues: string[] = []
