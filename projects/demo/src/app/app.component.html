@@ -45,8 +45,14 @@
         </li>
         <li><code>select</code>
             <div>
-                A field that lets user select a value based on a list of options. It also supports
-                multiple selection via the <code>selectMultiple</code> property.
+                A field that lets user select a value based on a list of options.
+                <ul>
+                    <li>Supports multiple selection via the <code>selectMultiple</code> property.
+                    </li>
+                    <li>Supports dynamic options based on current form value via
+                        <code>optionsFn</code>.
+                    </li>
+                </ul>
             </div>
         </li>
         <li><code>separator</code>
@@ -72,7 +78,7 @@
     <div typography-headline>Getting Started</div>
 
     <ul>
-        <li>This library was designed for Angular 7+ and uses Angular Material to display form
+        <li>This library was designed for Angular 8+ and uses Angular Material to display form
             fields, so you will need a project with these dependencies configured.
         </li>
         <li>To install this library from NPM:
@@ -91,7 +97,7 @@
             </div>
         </li>
         <li padding-top>
-            <code>QuickFormField</code>
+            <code>QuickFormField, QuickFormFieldType, QuickFormFieldOptionDefinition</code>
             <div>
                 Definition for a form field. A form basically constructed from an array
                 of fields. Granted, this approach has limitations when it comes to complex forms.
@@ -100,13 +106,17 @@
                 Angular's FormBuilder.
             </div>
             <div padding-top flex-cell default-cell-6 gutter>
-                <div>
-                    <pre no-margin height-300 style="overflow: auto"><code
+                <div cell-12>
+                    <pre no-margin><code
                             [highlight]="code.quickFormField"></code></pre>
                 </div>
                 <div>
-                    <pre no-margin height-300 style="overflow: auto"><code
+                    <pre no-margin><code
                             [highlight]="code.quickFormFieldType"></code></pre>
+                </div>
+                <div>
+                    <pre no-margin><code
+                            [highlight]="code.quickFormFieldOptionDefinition"></code></pre>
                 </div>
             </div>
         </li>

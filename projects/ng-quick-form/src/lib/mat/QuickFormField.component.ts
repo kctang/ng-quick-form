@@ -1,7 +1,7 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef,
-  Input,
+  Input, OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core'
@@ -9,11 +9,12 @@ import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/for
 import { QuickFormField } from '../QuickFormField'
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { MatChipInputEvent } from '@angular/material/chips'
-import { Observable } from 'rxjs'
-import { map, startWith } from 'rxjs/operators'
+import { Observable, Subscription } from 'rxjs'
+import { debounceTime, map, startWith, tap, throttleTime } from 'rxjs/operators'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { getErrorMessage } from '../util/getErrorMessage'
 import { assert } from '../util/assert'
+import { resolvedOptions } from '../util/resolveOptions'
 
 @Component({
   selector: 'quick-form-field',
@@ -21,7 +22,9 @@ import { assert } from '../util/assert'
   styleUrls: [ './QuickFormField.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuickFormFieldComponent implements OnInit {
+export class QuickFormFieldComponent implements OnInit, OnDestroy {
+  protected _subs: Subscription[] = []
+
   @Input()
   form!: FormGroup
 
@@ -39,6 +42,11 @@ export class QuickFormFieldComponent implements OnInit {
   chipWithGroups = false
   filteredChipValuesWithGroup!: Observable<{ group: string, options: { value: any, label: string }[] }[]>
   filteredChipValues!: Observable<{ value: any, label: string }[]>
+
+  finalOptions: { label: string, value: any }[] = []
+
+  constructor (private cd: ChangeDetectorRef) {
+  }
 
   ngOnInit (): void {
     if (this.field.type === 'chips') {
@@ -61,6 +69,56 @@ export class QuickFormFieldComponent implements OnInit {
         )
       }
     }
+
+    if (typeof this.field.optionsFn === 'function') {
+      this.autoUnsubscribe(
+        this.form.valueChanges.pipe(
+          startWith(this.form.value),
+          throttleTime(300),
+          tap(values => {
+            console.log('value changes...')
+            // 1. call optionsFn with current form value to get the dynamic options definition
+            // 2. options definition can be 'simplified', so need to resolve each time
+            this.finalOptions = resolvedOptions(this.field.optionsFn!(values))
+            // 3. if field value is not part of option's value... clear the value
+            const fieldControl = this.form.get(this.fieldId)
+            if (fieldControl) {
+              const isValidValue = this.finalOptions.find(finalOption => finalOption.value === fieldControl.value)
+              if (!isValidValue) {
+                fieldControl.setValue('')
+              }
+            }
+            this.cd.markForCheck()
+          })
+        )
+      )
+    } else {
+      // this.field.options is statically resolved, just set it once
+      this.finalOptions = this.field.options as { label: string, value: any }[]
+    }
+  }
+
+  ngOnDestroy () {
+    if (this._subs.length > 0) {
+      this._subs.map(sub => sub.unsubscribe())
+      this._subs.length = 0
+    }
+  }
+
+  autoUnsubscribe (...subs: (Subscription | Observable<any>)[]) {
+    subs.map(sub => {
+      if (sub instanceof Subscription) {
+        this._subs.push(sub)
+      } else {
+        this._subs.push(sub.subscribe(
+          () => {
+          },
+          e => {
+            throw e
+          }
+        ))
+      }
+    })
   }
 
   errorMessage (control: AbstractControl) {
@@ -76,12 +134,12 @@ export class QuickFormFieldComponent implements OnInit {
     return this.field.id!
   }
 
-  getOptionValue (i: number) {
+  getCbOptionValue (i: number) {
     const option = this.field.options![ i ] as { value: string }
     return option.value
   }
 
-  getOptionLabel (i: number) {
+  getCbOptionLabel (i: number) {
     const option = this.field.options![ i ] as { label: string }
     return option.label
   }

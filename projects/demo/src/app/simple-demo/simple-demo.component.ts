@@ -17,6 +17,25 @@ export class SimpleDemoComponent implements OnInit {
       ]
     },
     {
+      title: 'Country', type: 'select',
+      options: [ 'Australia', 'Finland', 'Kenya', 'Malaysia', 'Peru' ]
+    },
+
+    {
+      title: 'State', type: 'select',
+      // options for state changes based on selected country
+      optionsFn: (values: any) => {
+        switch (values.country) {
+          case 'Australia':
+            return [ 'Perth', 'Sydney', 'Atlantis' ]
+          case 'Malaysia':
+            return [ 'Selangor', 'Kuala Lumpur', 'Atlantis' ]
+          default:
+            return [ 'Other State 1', 'Other State 2' ]
+        }
+      }
+    },
+    {
       title: 'Front End', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
       value: 'Angular'

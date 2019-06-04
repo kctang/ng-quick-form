@@ -1,5 +1,6 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms'
 import { QuickFormFieldType } from './QuickFormFieldType'
+import { QuickFormFieldOptionDefinition } from './QuickFormFieldOptionDefinition'
 
 /**
  * QuickFormField represents definition for a field.
@@ -39,12 +40,19 @@ export type QuickFormField = {
    *
    * Optional.
    */
-  options?: (
-    string |
-    { value: any, label: string } |
-    { group: string, options: string[] } |
-    { group: string, options: { value: any, label: string }[] }
-    )[]
+  options?: QuickFormFieldOptionDefinition[]
+
+  /**
+   * For advanced use case, options can be specified as return value for a function that
+   * receives form values as input.
+   *
+   * If both options and optionsFn is specified, optionsFn will be used instead.
+   *
+   * Optional.
+   *
+   * @param formValues Current form values.
+   */
+  optionsFn?: (formValues: any) => QuickFormFieldOptionDefinition[]
 
   /**
    * Flag to indicate that field input is required. Optional. Defaults to false.

@@ -39,6 +39,25 @@ export class SimpleDemoComponent implements OnInit {
       ]
     },
     {
+      title: 'Country', type: 'select',
+      options: [ 'Australia', 'Finland', 'Kenya', 'Malaysia', 'Peru' ]
+    },
+
+    {
+      title: 'State', type: 'select',
+      // options for state changes based on selected country
+      optionsFn: (values: any) => {
+        switch (values.country) {
+          case 'Australia':
+            return [ 'Perth', 'Sydney', 'Atlantis' ]
+          case 'Malaysia':
+            return [ 'Selangor', 'Kuala Lumpur', 'Atlantis' ]
+          default:
+            return [ 'Other State 1', 'Other State 2' ]
+        }
+      }
+    },
+    {
       title: 'Front End', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
       value: 'Angular'
@@ -86,8 +105,7 @@ export class SimpleDemoComponent implements OnInit {
   get valid () {
     return this.form.valid
   }
-}
-`
+}`
   },
 
   fieldTypes: {
@@ -214,6 +232,7 @@ export class FieldTypesDemoComponent implements OnInit {
 
   quickFormField: `import { AsyncValidatorFn, ValidatorFn } from '@angular/forms'
 import { QuickFormFieldType } from './QuickFormFieldType'
+import { QuickFormFieldOptionDefinition } from './QuickFormFieldOptionDefinition'
 
 /**
  * QuickFormField represents definition for a field.
@@ -225,50 +244,50 @@ export type QuickFormField = {
   title: string
 
   /**
-   * Unique identifier for the field. Optional. 
-   * Defaults to camel case representation of title.
+   * Unique identifier for the field. Optional. Defaults to camel case representation of title.
    */
   id?: string
 
   /**
-   * Field type. Valid values are 'checkbox', 'chips', 
-   * 'password', 'radio', 'select', 'separator', 'switch', 
-   * 'text' and 'textarea'. Optional. Defaults to 'text'.
+   * Field type. Valid values are 'checkbox', 'chips', 'password', 'radio', 'select', 'separator',
+   * 'switch', 'text' and 'textarea'. Optional. Defaults to 'text'.
    */
   type?: QuickFormFieldType
 
   /**
-   * Default value for the field when the form 
-   * is displayed. Optional.
+   * Default value for the field when the form is displayed. Optional.
    */
   value?: any | any[]
 
   /**
-   * List of possible options for 'radio', 'checkbox', 
-   * 'chips' and 'select' field types.
+   * List of possible options for 'radio', 'checkbox', 'chips' and 'select' field types.
    *
-   * Note: While some field types allow different values 
-   * for display (label) and form data (value), 'chip' 
-   * type uses label for both display and as form data.
+   * Note: While some field types allow different values for display (label) and form data
+   * (value), 'chip' type uses label for both display and as form data.
    *
    * Options can be specified as:
    * <li> array of string</li>
    * <li> array of object with 'value' and 'label' as keys</li>
-   * <li> array of object with 'group' and 'options' as 
-   * keys (see type definition)</li>
+   * <li> array of object with 'group' and 'options' as keys (see type definition)</li>
    *
    * Optional.
    */
-  options?: (
-    string |
-    { value: any, label: string } |
-    { group: string, options: string[] } |
-    { group: string, options: { value: any, label: string }[] }
-    )[]
+  options?: QuickFormFieldOptionDefinition[]
 
   /**
-   * Flag to indicate that field input is required. Optional. 
-   * Defaults to false.
+   * For advanced use case, options can be specified as return value for a function that 
+   * receives form values as input.
+   *
+   * If both options and optionsFn is specified, optionsFn will be used instead.
+   *
+   * Optional.
+   *
+   * @param formValues Current form values.
+   */
+  optionsFn?: (formValues: any) => QuickFormFieldOptionDefinition[]
+
+  /**
+   * Flag to indicate that field input is required. Optional. Defaults to false.
    */
   required?: boolean
 
@@ -278,17 +297,32 @@ export type QuickFormField = {
   selectMultiple?: boolean
 
   /**
-   * Array of Angular validation functions (i.e. ValidatorFn). 
-   * Optional.
+   * Array of Angular validation functions (i.e. ValidatorFn). Optional.
    */
   validators?: ValidatorFn[]
 
   /**
-   * Array of asynchronous Angular validation functions (i.e. 
-   * AsyncValidatorFn). Optional.
+   * Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
    */
   asyncValidators?: AsyncValidatorFn[]
-}
+}`,
+
+  quickFormFieldOptionDefinition: `/**
+ * Supported form field option definition styles.
+ */
+export type QuickFormFieldOptionDefinition = (
+  // shorthand - string value will be used for both "value" and "label"
+  string |
+
+  // specify values for "value" and "label"
+  { value: any, label: string } |
+
+  // shorthand style within an option group
+  { group: string, options: string[] } |
+
+  // option group where value and labels must be specified separately
+  { group: string, options: { value: any, label: string }[] }
+  )
 `,
 
   quickFormFieldType: `/**

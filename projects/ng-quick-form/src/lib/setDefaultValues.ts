@@ -4,6 +4,7 @@
  * @param fields
  */
 import { QuickFormField } from './QuickFormField'
+import { resolvedOptions } from './util/resolveOptions'
 
 /**
  * https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
@@ -31,27 +32,7 @@ export const setDefaultValues = (fields: QuickFormField[]) => {
     }
 
     // set default field options
-    field.options = field.options || []
-    field.options = field.options.map<any>(option => {
-      if (typeof option === 'string') {
-        // convert to { value: string, label: string }
-        return { label: option, value: option }
-      } else {
-        // convert options in groups if specified as string
-        const groupOption = option as { group: string, options: any[] }
-        if (groupOption.group && Array.isArray(groupOption.options)) {
-          groupOption.options = groupOption.options.map(option => {
-            if (typeof option === 'string') {
-              return { label: option, value: option }
-            } else {
-              return option
-            }
-          })
-        }
-        return groupOption
-      }
-    })
-
+    field.options = resolvedOptions(field.options || [])
     // set default values for field
     if (field.type === 'checkbox' || field.type === 'chips') {
       if (field.value === undefined) {

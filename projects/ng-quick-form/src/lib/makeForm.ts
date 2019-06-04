@@ -6,6 +6,7 @@
 import { QuickFormField } from './QuickFormField'
 import { FormBuilder } from '@angular/forms'
 import { setDefaultValues } from './setDefaultValues'
+import { assert } from './util/assert'
 
 export const makeForm = (fields: QuickFormField[]) => {
   const fb = new FormBuilder()
@@ -14,6 +15,12 @@ export const makeForm = (fields: QuickFormField[]) => {
   setDefaultValues(fields)
 
   fields.map(field => {
+    if (field.type === 'checkbox' || field.type === 'chips') {
+      assert(typeof field.optionsFn !== 'function',
+        `"optionsFn" cannot be used by field [${field.id}]. Not supported by checkbox and chips field types.`
+      )
+    }
+
     const fieldId = field.id!
 
     switch (field.type) {

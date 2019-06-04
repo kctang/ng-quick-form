@@ -73,7 +73,7 @@
         <mat-select [formControlName]="fieldId" [placeholder]="field.title"
                     [multiple]="field.selectMultiple"
                     [required]="field.required">
-            <mat-option *ngFor="let option of field.options" [value]="option.value">
+            <mat-option *ngFor="let option of finalOptions" [value]="option.value">
                 {{option.label}}
             </mat-option>
         </mat-select>
@@ -92,7 +92,7 @@
         <mat-radio-group [formControlName]="fieldId" [required]="field.required">
             <label typography-caption>{{field.title}}</label>
             <div flex-cell gutter padding-bottom>
-                <mat-radio-button *ngFor="let option of field.options" [value]="option.value"
+                <mat-radio-button *ngFor="let option of finalOptions" [value]="option.value"
                                   cell-2>
                     {{option.label}}
                 </mat-radio-button>
@@ -110,9 +110,9 @@
             <ng-container
                     *ngFor="let control of getChildControls('__cb-' + fieldId); let i = index">
                 <ng-container [formGroupName]="i">
-                    <mat-checkbox formControlName="cb" #cb [value]="getOptionValue(i)"
+                    <mat-checkbox formControlName="cb" #cb [value]="getCbOptionValue(i)"
                                   (change)="doUpdateCb(i, cb.checked)" cell-2>
-                        {{getOptionLabel(i)}}
+                        {{getCbOptionLabel(i)}}
                     </mat-checkbox>
                 </ng-container>
             </ng-container>
