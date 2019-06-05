@@ -8,6 +8,20 @@
         </mat-error>
     </mat-form-field>
 
+    <!--autocomplete-->
+    <mat-form-field *ngSwitchCase="'autocomplete'" width-full>
+        <input matInput [formControlName]="fieldId" [placeholder]="field.title"
+               [required]="field.required" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredFinalOptions | async" [value]="option.value">
+                {{option.label}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="!form.controls[fieldId].valid">
+            {{errorMessage(form.controls[fieldId])}}
+        </mat-error>
+    </mat-form-field>
+
     <!--password-->
     <mat-form-field *ngSwitchCase="'password'" width-full>
         <input matInput type="password" [formControlName]="fieldId" [placeholder]="field.title"

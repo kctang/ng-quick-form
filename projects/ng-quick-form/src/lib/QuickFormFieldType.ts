@@ -2,7 +2,8 @@
  * Supported field types.
  */
 export type QuickFormFieldType =
-  'checkbox'
+  'autocomplete'
+  | 'checkbox'
   | 'chips'
   | 'password'
   | 'radio'
