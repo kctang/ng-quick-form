@@ -147,7 +147,8 @@ export class FieldTypesDemoComponent implements OnInit {
     },
     {
       title: 'Good', disabled: true,
-      value: 'Good'
+      value: 'Good',
+      suffixIcon: 'sentiment_very_satisfied', suffixIconTooltip: 'Happy'
     },
     { title: 'Hungry?', type: 'switch' },
     { title: 'Programming Questions', type: 'separator' },
@@ -335,6 +336,16 @@ export type QuickFormField = {
    * Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
    */
   asyncValidators?: AsyncValidatorFn[]
+
+  /**
+   * Suffix icon.
+   */
+  suffixIcon?: string
+
+  /**
+   * Suffix icon tooltip.
+   */
+  suffixIconTooltip?: string
 }`,
 
   quickFormFieldOptionDefinition: `/**

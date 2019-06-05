@@ -78,4 +78,14 @@ export type QuickFormField = {
    * Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
    */
   asyncValidators?: AsyncValidatorFn[]
+
+  /**
+   * Suffix icon.
+   */
+  suffixIcon?: string
+
+  /**
+   * Suffix icon tooltip.
+   */
+  suffixIconTooltip?: string
 }
