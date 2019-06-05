@@ -76,7 +76,6 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
           startWith(this.form.value),
           throttleTime(300),
           tap(values => {
-            console.log('value changes...')
             // 1. capture old options
             const previousFinalOption = this.finalOptions
 
