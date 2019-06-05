@@ -10,7 +10,7 @@ import { QuickFormField } from '../QuickFormField'
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { MatChipInputEvent } from '@angular/material/chips'
 import { Observable, Subscription } from 'rxjs'
-import { debounceTime, map, startWith, tap, throttleTime } from 'rxjs/operators'
+import { map, startWith, tap, throttleTime } from 'rxjs/operators'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { getErrorMessage } from '../util/getErrorMessage'
 import { assert } from '../util/assert'
@@ -42,7 +42,7 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
   chipWithGroups = false
   filteredChipValuesWithGroup!: Observable<{ group: string, options: { value: any, label: string }[] }[]>
   filteredChipValues!: Observable<{ value: any, label: string }[]>
-
+  filteredFinalOptions!: Observable<{ label: string, value: any }[]>
   finalOptions: { label: string, value: any }[] = []
 
   constructor (private cd: ChangeDetectorRef) {
@@ -77,17 +77,26 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
           throttleTime(300),
           tap(values => {
             console.log('value changes...')
-            // 1. call optionsFn with current form value to get the dynamic options definition
-            // 2. options definition can be 'simplified', so need to resolve each time
+            // 1. capture old options
+            const previousFinalOption = this.finalOptions
+
+            // 2. call optionsFn with current form value to get the dynamic options definition
+            // 3. options definition can be 'simplified', so need to resolve each time
             this.finalOptions = resolvedOptions(this.field.optionsFn!(values))
-            // 3. if field value is not part of option's value... clear the value
-            const fieldControl = this.form.get(this.fieldId)
-            if (fieldControl) {
-              const isValidValue = this.finalOptions.find(finalOption => finalOption.value === fieldControl.value)
-              if (!isValidValue) {
-                fieldControl.setValue('')
+
+            // 4. Check if options is change
+            if (JSON.stringify(previousFinalOption) !== JSON.stringify(this.finalOptions)) {
+              // 5. if field value is not part of option's value... clear the value
+              const fieldControl = this.form.get(this.fieldId)
+              if (fieldControl) {
+                const isValidValue = this.finalOptions.find(finalOption => finalOption.value === fieldControl.value)
+                if (!isValidValue) {
+                  fieldControl.setValue('')
+                }
               }
+              this.filterAutoCompleteOptions()
             }
+
             this.cd.markForCheck()
           })
         )
@@ -95,6 +104,20 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
     } else {
       // this.field.options is statically resolved, just set it once
       this.finalOptions = this.field.options as { label: string, value: any }[]
+    }
+
+    this.filterAutoCompleteOptions()
+  }
+
+  private filterAutoCompleteOptions () {
+    if (this.field.type === 'autocomplete') {
+      this.filteredFinalOptions = (this.form.get(this.fieldId) as FormControl).valueChanges.pipe(
+        startWith(''),
+        map(value => {
+          const filterValue = value.toLowerCase()
+          return this.finalOptions.filter(option => option.label.toLowerCase().includes(filterValue))
+        })
+      )
     }
   }
 

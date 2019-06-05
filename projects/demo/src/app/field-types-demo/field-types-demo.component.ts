@@ -37,6 +37,27 @@ export class FieldTypesDemoComponent implements OnInit {
       title: 'Prefers', type: 'radio', required: true,
       options: [ 'Front End', 'Back End', 'Full Stack', 'Whatever' ]
     },
+    { title: 'Pet', type: 'separator' },
+    {
+      title: 'Animal Type', type: 'autocomplete',
+      options: [ 'Fish', 'Insect', 'Mammal' ]
+    },
+    {
+      title: 'Animal', type: 'autocomplete',
+      // options for animal changes based on selected animal type
+      optionsFn: (values: any) => {
+        switch (values.animalType) {
+          case 'Fish':
+            return [ 'Gold Fish', 'Nemo' ]
+          case 'Insect':
+            return [ 'Ant', 'Bee', 'Spider' ]
+          case 'Mammal':
+            return [ 'Cat', 'Dog', 'Monkey' ]
+          default:
+            return [ ]
+        }
+      }
+    },
     { title: 'Entertainment', type: 'separator' },
     {
       title: 'Series/Movies', type: 'chips',
