@@ -145,6 +145,10 @@ export class FieldTypesDemoComponent implements OnInit {
         Validators.maxLength(10)
       ]
     },
+    {
+      title: 'Good', disabled: true,
+      value: 'Good'
+    },
     { title: 'Hungry?', type: 'switch' },
     { title: 'Programming Questions', type: 'separator' },
     {
@@ -275,7 +279,7 @@ export type QuickFormField = {
   options?: QuickFormFieldOptionDefinition[]
 
   /**
-   * For advanced use case, options can be specified as return value for a function that 
+   * For advanced use case, options can be specified as return value for a function that
    * receives form values as input.
    *
    * If both options and optionsFn is specified, optionsFn will be used instead.
@@ -290,6 +294,11 @@ export type QuickFormField = {
    * Flag to indicate that field input is required. Optional. Defaults to false.
    */
   required?: boolean
+
+  /**
+   * Flag to indicate that field input is disabled. Optional. Defaults to false.
+   */
+  disabled?: boolean
 
   /**
    * For 'select' field type, true to allow multiple selection.

@@ -39,7 +39,7 @@ export const makeForm = (fields: QuickFormField[]) => {
           const options = options2.map(option => {
             const checked = field.value.indexOf(option.value) !== -1
             return fb.group({
-              cb: [ checked ]
+              cb: [ { value: checked, disabled: field.disabled } ]
             })
           })
 
@@ -52,11 +52,11 @@ export const makeForm = (fields: QuickFormField[]) => {
         break
 
       default:
-        form[ fieldId ] = [ field.value || '', [
-          ...(field.validators || [])
-        ], [
-          ...(field.asyncValidators || [])
-        ] ]
+        form[ fieldId ] = [
+          { value: field.value || '', disabled: field.disabled },
+          [ ...(field.validators || []) ],
+          [ ...(field.asyncValidators || []) ]
+        ]
     }
   })
 

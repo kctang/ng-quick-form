@@ -17,6 +17,10 @@ export class FieldTypesDemoComponent implements OnInit {
         Validators.maxLength(10)
       ]
     },
+    {
+      title: 'Good', disabled: true,
+      value: 'Good'
+    },
     { title: 'Hungry?', type: 'switch' },
     { title: 'Programming Questions', type: 'separator' },
     {
