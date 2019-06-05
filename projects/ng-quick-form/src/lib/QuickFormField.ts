@@ -60,6 +60,11 @@ export type QuickFormField = {
   required?: boolean
 
   /**
+   * Flag to indicate that field input is disabled. Optional. Defaults to false.
+   */
+  disabled?: boolean
+
+  /**
    * For 'select' field type, true to allow multiple selection.
    */
   selectMultiple?: boolean
