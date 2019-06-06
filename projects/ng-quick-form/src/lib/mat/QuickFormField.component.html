@@ -3,6 +3,7 @@
     <mat-form-field *ngSwitchCase="'text'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -14,6 +15,7 @@
     <mat-form-field *ngSwitchCase="'autocomplete'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required" [matAutocomplete]="auto">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -30,6 +32,7 @@
     <mat-form-field *ngSwitchCase="'password'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <input matInput type="password" [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -41,6 +44,7 @@
     <mat-form-field *ngSwitchCase="'textarea'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <textarea matInput cdkTextareaAutosize [formControlName]="fieldId"
                   [placeholder]="field.title" [required]="field.required">
         </textarea>
@@ -53,6 +57,7 @@
     <mat-form-field *ngSwitchCase="'chips'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <mat-chip-list #chipList>
             <mat-chip
                     *ngFor="let chipValue of chipValues"
@@ -96,6 +101,7 @@
     <mat-form-field *ngSwitchCase="'select'" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <mat-select [formControlName]="fieldId" [placeholder]="field.title"
                     [multiple]="field.selectMultiple"
                     [required]="field.required">
@@ -112,11 +118,13 @@
     <div *ngSwitchCase="'switch'" typography-body-1 width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
+        <mat-label>{{field.title}}</mat-label>
         <mat-slide-toggle [formControlName]="fieldId">{{field.title}}</mat-slide-toggle>
     </div>
 
     <!--radio field-->
     <div *ngSwitchCase="'radio'" width-full>
+        <mat-label>{{field.title}}</mat-label>
         <mat-radio-group [formControlName]="fieldId" [required]="field.required">
             <label typography-caption>{{field.title}}
                 <mat-icon *ngIf="field.suffixIcon" matSuffix inline="true" [matTooltip]="field.suffixIconTooltip">
