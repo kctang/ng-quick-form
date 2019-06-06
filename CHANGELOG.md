@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.7] - 2019-06-06
+
+### Added
+- Support suffix icon with tooltip (Contributed by @zeskysee).
+
+### Fixed
+
+- Fix missing label for appearance standard, fill and outline (Contributed by @zeskysee).
+
 ## [0.0.6] - 2019-06-05
 
 ### Added
@@ -15,6 +24,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Select form field's options which able to filter by another select form field's value. Implements [issue#1](https://github.com/kctang/ng-quick-form/issues/1). 
 
-[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.7...HEAD
+[0.0.7]: https://github.com/kctang/ng-quick-form/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/kctang/ng-quick-form/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/kctang/ng-quick-form/compare/v0.0.4...v0.0.5
