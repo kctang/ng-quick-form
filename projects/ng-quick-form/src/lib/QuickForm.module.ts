@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { CommonModule } from '@angular/common'
 import { QuickFormFieldComponent } from './mat/QuickFormField.component'
+import { MatTooltipModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { QuickFormFieldComponent } from './mat/QuickFormField.component'
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTooltipModule
   ],
   exports: [
     QuickFormFieldComponent

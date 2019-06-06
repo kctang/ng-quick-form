@@ -1,6 +1,8 @@
 <ng-container [formGroup]="form" [ngSwitch]="field.type">
     <!--text field-->
     <mat-form-field *ngSwitchCase="'text'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
@@ -11,6 +13,8 @@
 
     <!--autocomplete-->
     <mat-form-field *ngSwitchCase="'autocomplete'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required" [matAutocomplete]="auto">
@@ -26,6 +30,8 @@
 
     <!--password-->
     <mat-form-field *ngSwitchCase="'password'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput type="password" [formControlName]="fieldId" [placeholder]="field.title"
                [required]="field.required">
@@ -36,6 +42,8 @@
 
     <!--textarea-->
     <mat-form-field *ngSwitchCase="'textarea'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <textarea matInput cdkTextareaAutosize [formControlName]="fieldId"
                   [placeholder]="field.title" [required]="field.required">
@@ -47,6 +55,8 @@
 
     <!--chip-->
     <mat-form-field *ngSwitchCase="'chips'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <mat-chip-list #chipList>
             <mat-chip
@@ -89,6 +99,8 @@
 
     <!--select-->
     <mat-form-field *ngSwitchCase="'select'" width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <mat-select [formControlName]="fieldId" [placeholder]="field.title"
                     [multiple]="field.selectMultiple"
@@ -104,6 +116,8 @@
 
     <!--switch field-->
     <div *ngSwitchCase="'switch'" typography-body-1 width-full>
+        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
+            {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <mat-slide-toggle [formControlName]="fieldId">{{field.title}}</mat-slide-toggle>
     </div>
@@ -112,7 +126,9 @@
     <div *ngSwitchCase="'radio'" width-full>
         <mat-label>{{field.title}}</mat-label>
         <mat-radio-group [formControlName]="fieldId" [required]="field.required">
-            <label typography-caption>{{field.title}}</label>
+            <label typography-caption>{{field.title}}
+                <mat-icon *ngIf="field.suffixIcon" matSuffix inline="true" [matTooltip]="field.suffixIconTooltip">
+                    {{field.suffixIcon}}</mat-icon></label>
             <div flex-cell gutter padding-bottom>
                 <mat-radio-button *ngFor="let option of finalOptions" [value]="option.value"
                                   cell-2>
@@ -127,7 +143,9 @@
 
     <!--checkbox-->
     <div *ngSwitchCase="'checkbox'" padding-bottom width-full>
-        <label typography-caption>{{field.title}}</label>
+        <label typography-caption>{{field.title}}
+            <mat-icon *ngIf="field.suffixIcon" matSuffix inline="true" [matTooltip]="field.suffixIconTooltip">
+                {{field.suffixIcon}}</mat-icon></label>
         <div [formArrayName]="'__cb-' + fieldId" flex-cell gutter>
             <ng-container
                     *ngFor="let control of getChildControls('__cb-' + fieldId); let i = index">
