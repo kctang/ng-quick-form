@@ -116,10 +116,10 @@
 
     <!--switch field-->
     <div *ngSwitchCase="'switch'" typography-body-1 width-full>
-        <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
-            {{field.suffixIcon}}</mat-icon>
-        <mat-label>{{field.title}}</mat-label>
-        <mat-slide-toggle [formControlName]="fieldId">{{field.title}}</mat-slide-toggle>
+        <mat-slide-toggle [formControlName]="fieldId">{{field.title}}
+            <mat-icon *ngIf="field.suffixIcon" inline="true" matSuffix [matTooltip]="field.suffixIconTooltip">
+                {{field.suffixIcon}}</mat-icon>
+        </mat-slide-toggle>
     </div>
 
     <!--radio field-->
