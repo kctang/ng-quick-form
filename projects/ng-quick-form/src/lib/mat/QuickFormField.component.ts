@@ -20,7 +20,8 @@ import { resolvedOptions } from '../util/resolveOptions'
   selector: 'quick-form-field',
   templateUrl: './QuickFormField.component.html',
   styleUrls: [ './QuickFormField.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // TODO: proper fix for hack to avoid error message 'sometimes' not showing.
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class QuickFormFieldComponent implements OnInit, OnDestroy {
   protected _subs: Subscription[] = []

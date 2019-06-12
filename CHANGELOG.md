@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.9] - 2019-06-12
+
+- Quick fix for field validation error message "sometimes" not displaying. 
+
 ## [0.0.8] - 2019-06-06
 
 - Fix switch label & suffix icon.
@@ -28,7 +32,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Select form field's options which able to filter by another select form field's value. Implements [issue#1](https://github.com/kctang/ng-quick-form/issues/1). 
 
-[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.8...HEAD
+[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.9...HEAD
+[0.0.9]: https://github.com/kctang/ng-quick-form/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/kctang/ng-quick-form/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/kctang/ng-quick-form/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/kctang/ng-quick-form/compare/v0.0.5...v0.0.6
