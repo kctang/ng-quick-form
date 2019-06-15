@@ -86,12 +86,14 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
 
             // 4. Check if options is change
             if (JSON.stringify(previousFinalOption) !== JSON.stringify(this.finalOptions)) {
-              // 5. if field value is not part of option's value... clear the value
+              // 5. if field value is not part of option's value... clear the value for select
               const fieldControl = this.form.get(this.fieldId)
               if (fieldControl) {
                 const isValidValue = this.finalOptions.find(finalOption => finalOption.value === fieldControl.value)
                 if (!isValidValue) {
-                  fieldControl.setValue('')
+                  if (this.field.type === 'select') {
+                    fieldControl.setValue('')
+                  }
                 }
               }
               this.filterAutoCompleteOptions()
