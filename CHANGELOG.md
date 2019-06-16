@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.10] - 2019-06-16
+
+- Fix auto-complete value. 
+
 ## [0.0.9] - 2019-06-12
 
 - Quick fix for field validation error message "sometimes" not displaying. 
