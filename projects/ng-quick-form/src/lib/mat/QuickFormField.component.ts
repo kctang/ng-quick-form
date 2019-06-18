@@ -91,7 +91,7 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
               if (fieldControl) {
                 const isValidValue = this.finalOptions.find(finalOption => finalOption.value === fieldControl.value)
                 if (!isValidValue) {
-                  if (this.field.type === 'select') {
+                  if (this.field.type === 'select' && fieldControl.value !== '') {
                     fieldControl.setValue('')
                   }
                 }
