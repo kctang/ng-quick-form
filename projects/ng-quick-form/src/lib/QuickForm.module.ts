@@ -11,10 +11,11 @@ import { MatInputModule } from '@angular/material/input'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { CommonModule } from '@angular/common'
 import { QuickFormFieldComponent } from './mat/QuickFormField.component'
-import { MatTooltipModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatTooltipModule } from '@angular/material'
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatDatepickerModule,
     MatAutocompleteModule,
     MatIconModule,
     MatDialogModule,

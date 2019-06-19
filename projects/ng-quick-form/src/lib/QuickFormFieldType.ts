@@ -5,6 +5,7 @@ export type QuickFormFieldType =
   'autocomplete'
   | 'checkbox'
   | 'chips'
+  | 'datepicker'
   | 'password'
   | 'radio'
   | 'select'

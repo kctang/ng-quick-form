@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-
 import { AppComponent } from './app.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -16,6 +15,7 @@ import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
 import { FieldTypesDemoComponent } from './field-types-demo/field-types-demo.component'
 import { QuickFormModule } from 'ng-quick-form'
+import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material'
 
 export function hljsLanguages () {
   return [
@@ -40,13 +40,16 @@ export function hljsLanguages () {
     ReactiveFormsModule,
     MatTabsModule,
     MatButtonModule,
+    MatNativeDateModule,
     HighlightModule.forRoot({
       languages: hljsLanguages
     }),
     MatTooltipModule,
     MatButtonToggleModule
   ],
-  providers: [],
+  providers: [
+    { provide: DateAdapter, useClass: NativeDateAdapter }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

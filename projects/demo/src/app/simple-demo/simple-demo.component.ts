@@ -20,7 +20,28 @@ export class SimpleDemoComponent implements OnInit {
       title: 'Country', type: 'select',
       options: [ 'Australia', 'Finland', 'Kenya', 'Malaysia', 'Peru' ]
     },
-
+    {
+      title: 'Last Zoo Visit', type: 'datepicker',
+      required: true,
+      validators: [
+        Validators.required,
+        control => {
+          const { value } = control
+          if (value instanceof Date) {
+            const now = new Date()
+            if (now.getUTCFullYear() === value.getUTCFullYear() &&
+              now.getUTCMonth() === value.getUTCMonth() &&
+              now.getUTCDate() === value.getUTCDate()) {
+              return null
+            } else {
+              return { 'Only today is a valid value': true }
+            }
+          } else {
+            return { 'I need a date!': true }
+          }
+        }
+      ]
+    },
     {
       title: 'State', type: 'select',
       // options for state changes based on selected country

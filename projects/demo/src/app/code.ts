@@ -42,7 +42,9 @@ export class SimpleDemoComponent implements OnInit {
       title: 'Country', type: 'select',
       options: [ 'Australia', 'Finland', 'Kenya', 'Malaysia', 'Peru' ]
     },
-
+    {
+      title: 'Last Zoo Visit', type: 'datepicker'
+    },
     {
       title: 'State', type: 'select',
       // options for state changes based on selected country
@@ -275,7 +277,7 @@ export type QuickFormField = {
   id?: string
 
   /**
-   * Field type. Valid values are 'checkbox', 'chips', 'password', 'radio', 'select', 'separator',
+   * Field type. Valid values are 'checkbox', 'chips', 'datepicker', 'password', 'radio', 'select', 'separator',
    * 'switch', 'text' and 'textarea'. Optional. Defaults to 'text'.
    */
   type?: QuickFormFieldType
@@ -373,6 +375,7 @@ export type QuickFormFieldType =
   'autocomplete'
   | 'checkbox'
   | 'chips'
+  | 'datepicker'
   | 'password'
   | 'radio'
   | 'select'
