@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef,
-  Input, OnDestroy,
-  OnInit,
-  ViewChild
+  Input, OnChanges, OnDestroy,
+  SimpleChanges, ViewChild
 } from '@angular/core'
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms'
 import { QuickFormField } from '../QuickFormField'
@@ -23,8 +22,8 @@ import { resolvedOptions } from '../util/resolveOptions'
   // TODO: proper fix for hack to avoid error message 'sometimes' not showing.
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class QuickFormFieldComponent implements OnInit, OnDestroy {
-  protected _subs: Subscription[] = []
+export class QuickFormFieldComponent implements OnChanges, OnDestroy {
+  protected _onChangesSubs: Subscription[] = []
 
   @Input()
   form!: FormGroup
@@ -49,7 +48,38 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
   constructor (private cd: ChangeDetectorRef) {
   }
 
-  ngOnInit (): void {
+  private filterAutoCompleteOptions () {
+    if (this.field.type === 'autocomplete') {
+      this.filteredFinalOptions = (this.form.get(this.fieldId) as FormControl).valueChanges.pipe(
+        startWith(''),
+        map(value => {
+          const filterValue = value.toLowerCase()
+          return this.finalOptions.filter(option => option.label.toLowerCase().includes(filterValue))
+        })
+      )
+    }
+  }
+
+  autoUnsubscribeOnChanges (...subs: (Subscription | Observable<any>)[]) {
+    subs.map(sub => {
+      if (sub instanceof Subscription) {
+        this._onChangesSubs.push(sub)
+      } else {
+        this._onChangesSubs.push(sub.subscribe(
+          () => {
+          },
+          e => {
+            throw e
+          }
+        ))
+      }
+    })
+  }
+
+  ngOnChanges (changes: SimpleChanges): void {
+    // clean up first
+    this.unsubscribeOnChanges()
+
     if (this.field.type === 'chips') {
       this.chipValues = this.form.controls[ this.fieldId ].value
       this.chipWithGroups = this.isChipWithGroups()
@@ -72,7 +102,7 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
     }
 
     if (typeof this.field.optionsFn === 'function') {
-      this.autoUnsubscribe(
+      this.autoUnsubscribeOnChanges(
         this.form.valueChanges.pipe(
           startWith(this.form.value),
           throttleTime(300),
@@ -111,39 +141,16 @@ export class QuickFormFieldComponent implements OnInit, OnDestroy {
     this.filterAutoCompleteOptions()
   }
 
-  private filterAutoCompleteOptions () {
-    if (this.field.type === 'autocomplete') {
-      this.filteredFinalOptions = (this.form.get(this.fieldId) as FormControl).valueChanges.pipe(
-        startWith(''),
-        map(value => {
-          const filterValue = value.toLowerCase()
-          return this.finalOptions.filter(option => option.label.toLowerCase().includes(filterValue))
-        })
-      )
-    }
+  ngOnDestroy (): void {
+    this.unsubscribeOnChanges()
   }
 
-  ngOnDestroy () {
-    if (this._subs.length > 0) {
-      this._subs.map(sub => sub.unsubscribe())
-      this._subs.length = 0
+  private unsubscribeOnChanges () {
+    // unsubscribe previous changes first
+    if (this._onChangesSubs.length > 0) {
+      this._onChangesSubs.map(sub => sub.unsubscribe())
+      this._onChangesSubs.length = 0
     }
-  }
-
-  autoUnsubscribe (...subs: (Subscription | Observable<any>)[]) {
-    subs.map(sub => {
-      if (sub instanceof Subscription) {
-        this._subs.push(sub)
-      } else {
-        this._subs.push(sub.subscribe(
-          () => {
-          },
-          e => {
-            throw e
-          }
-        ))
-      }
-    })
   }
 
   errorMessage (control: AbstractControl) {

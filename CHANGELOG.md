@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.12] - 2019-06-19
+
+- Fix bug where `optionsFn` not called after form has changed. This fix change QuickFormField's lifecycle handling from `ngOnInit()` to `ngOnChanges()`.
+
 ## [0.0.11] - 2019-06-18
 
 - Minor bug fix.
@@ -40,7 +44,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Select form field's options which able to filter by another select form field's value. Implements [issue#1](https://github.com/kctang/ng-quick-form/issues/1). 
 
-[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.11...HEAD
+[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.12...HEAD
+[0.0.12]: https://github.com/kctang/ng-quick-form/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/kctang/ng-quick-form/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/kctang/ng-quick-form/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/kctang/ng-quick-form/compare/v0.0.8...v0.0.9
