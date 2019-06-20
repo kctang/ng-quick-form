@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.14] - 2019-06-20
+
+### Added
+
+- Manage field layout using properties within `layout`. It can be used to manage size of the cell occupied by the field. Layout is managed via [common-style-attributes](https://common-style-attributes.surge.sh/).
+
+- Assign CSS class(es) to a class via `layout.cssClass`. 
+
 ## [0.0.13] - 2019-06-19
 
 ### Added
@@ -50,7 +58,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Select form field's options which able to filter by another select form field's value. Implements [issue#1](https://github.com/kctang/ng-quick-form/issues/1). 
 
-[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.13...HEAD
+[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.14...HEAD
+[0.0.14]: https://github.com/kctang/ng-quick-form/compare/v0.0.13...v0.0.14
 [0.0.13]: https://github.com/kctang/ng-quick-form/compare/v0.0.12...v0.0.13
 [0.0.12]: https://github.com/kctang/ng-quick-form/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/kctang/ng-quick-form/compare/v0.0.10...v0.0.11

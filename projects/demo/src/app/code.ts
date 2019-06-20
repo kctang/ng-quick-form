@@ -1,9 +1,11 @@
 export const code = {
   simpleDemo: {
-    html: `
-<div padding>
+    html: `<div padding>
+    <!--
+    flex-cell and related attributes are features provided by https://common-style-attributes.surge.sh/
+    -->
     <div flex-cell default-cell-6 gutter>
-        <form [formGroup]="form">
+        <form [formGroup]="form" flex-cell gutter default-cell-6>
             <quick-form-field *ngFor="let field of fields"
                               [field]="field"
                               [form]="form">
@@ -17,8 +19,7 @@ export const code = {
             <pre no-margin><code [highlight]="values"></code></pre>
         </div>
     </div>
-</div>
-`,
+</div>`,
 
     ts: `import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core'
 import { FormGroup, Validators } from '@angular/forms'
@@ -33,7 +34,8 @@ export class SimpleDemoComponent implements OnInit {
   form!: FormGroup
   fields: QuickFormField[] = [
     {
-      title: 'Name', validators: [
+      title: 'Name',
+      validators: [
         Validators.minLength(3),
         Validators.maxLength(10)
       ]
@@ -43,7 +45,26 @@ export class SimpleDemoComponent implements OnInit {
       options: [ 'Australia', 'Finland', 'Kenya', 'Malaysia', 'Peru' ]
     },
     {
-      title: 'Last Zoo Visit', type: 'datepicker'
+      title: 'Last Zoo Visit', type: 'datepicker',
+      required: true,
+      validators: [
+        Validators.required,
+        control => {
+          const { value } = control
+          if (value instanceof Date) {
+            const now = new Date()
+            if (now.getUTCFullYear() === value.getUTCFullYear() &&
+              now.getUTCMonth() === value.getUTCMonth() &&
+              now.getUTCDate() === value.getUTCDate()) {
+              return null
+            } else {
+              return { 'Only today is a valid value': true }
+            }
+          } else {
+            return { 'I need a date!': true }
+          }
+        }
+      ]
     },
     {
       title: 'State', type: 'select',
@@ -62,7 +83,11 @@ export class SimpleDemoComponent implements OnInit {
     {
       title: 'Front End', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
-      value: 'Angular'
+      value: 'Angular',
+      layout: {
+        cell: 12,
+        cellPerOption: 4
+      }
     },
     {
       title: 'Series/Movies', type: 'chips',
@@ -92,7 +117,10 @@ export class SimpleDemoComponent implements OnInit {
             'Sicario 2: Soldado'
           ]
         }
-      ]
+      ],
+      layout: {
+        cell: 12
+      }
     }
   ]
 
@@ -277,8 +305,8 @@ export type QuickFormField = {
   id?: string
 
   /**
-   * Field type. Valid values are 'checkbox', 'chips', 'datepicker', 'password', 'radio', 'select', 'separator',
-   * 'switch', 'text' and 'textarea'. Optional. Defaults to 'text'.
+   * Field type. Valid values are 'checkbox', 'chips', 'datepicker', 'password', 'radio',
+   * 'select', 'separator', 'switch', 'text' and 'textarea'. Optional. Defaults to 'text'.
    */
   type?: QuickFormFieldType
 
@@ -348,6 +376,37 @@ export type QuickFormField = {
    * Suffix icon tooltip.
    */
   suffixIconTooltip?: string
+
+  /**
+   * Layout properties for field.
+   *
+   * Layout is managed via common-style-attributes (https://common-style-attributes.surge.sh/).
+   */
+  layout?: {
+    /**
+     * CSS class for field.
+     */
+    cssClass?: string
+
+    /**
+     * Number of cell this field should take up, using the flex-cell grid system.
+     */
+    cell?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+    /**
+     * If true, grow field width to use up remaining space in row.
+     */
+    grow?: boolean
+    /**
+     * If true, shrink field width minimum required by the field.
+     */
+    shrink?: boolean
+    /**
+     * Number of cell each option should take up.
+     *
+     * cellPerOption is only applicable to fields that display options (i.e. radio, checkbox).
+     */
+    cellPerOption?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  }
 }`,
 
   quickFormFieldOptionDefinition: `/**

@@ -20,7 +20,24 @@ import { resolvedOptions } from '../util/resolveOptions'
   templateUrl: './QuickFormField.component.html',
   styleUrls: [ './QuickFormField.component.scss' ],
   // TODO: proper fix for hack to avoid error message 'sometimes' not showing.
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
+  host: {
+    '[attr.grow]': 'flexCell.grow === true ? true : null',
+    '[attr.shrink]': 'flexCell.shrink === true ? true : null',
+    '[attr.cell-1]': 'flexCell.cell === 1 ? true : null',
+    '[attr.cell-2]': 'flexCell.cell === 2 ? true : null',
+    '[attr.cell-3]': 'flexCell.cell === 3 ? true : null',
+    '[attr.cell-4]': 'flexCell.cell === 4 ? true : null',
+    '[attr.cell-5]': 'flexCell.cell === 5 ? true : null',
+    '[attr.cell-6]': 'flexCell.cell === 6 ? true : null',
+    '[attr.cell-7]': 'flexCell.cell === 7 ? true : null',
+    '[attr.cell-8]': 'flexCell.cell === 8 ? true : null',
+    '[attr.cell-9]': 'flexCell.cell === 9 ? true : null',
+    '[attr.cell-10]': 'flexCell.cell === 10 ? true : null',
+    '[attr.cell-11]': 'flexCell.cell === 11 ? true : null',
+    '[attr.cell-12]': 'flexCell.cell === 12 ? true : null',
+    '[class]': 'cssClass !== null ? cssClass : null'
+  }
 })
 export class QuickFormFieldComponent implements OnChanges, OnDestroy {
   protected _onChangesSubs: Subscription[] = []
@@ -30,6 +47,14 @@ export class QuickFormFieldComponent implements OnChanges, OnDestroy {
 
   @Input()
   field!: QuickFormField
+
+  flexCell = {
+    shrink: null as null | boolean,
+    grow: null as null | boolean,
+    cell: null as null | number
+  }
+  cellPerOption = 2
+  cssClass = null as null | string | string[]
 
   separatorKeysCodes: number[] = [ ENTER, COMMA ]
 
@@ -79,6 +104,21 @@ export class QuickFormFieldComponent implements OnChanges, OnDestroy {
   ngOnChanges (changes: SimpleChanges): void {
     // clean up first
     this.unsubscribeOnChanges()
+
+    // configure field layout
+    if (this.field.layout) {
+      this.flexCell.shrink = this.field.layout.shrink ? true : null
+      this.flexCell.grow = this.field.layout.grow ? true : null
+      if (typeof this.field.layout.cell === 'number') {
+        this.flexCell.cell = this.field.layout.cell
+      }
+      if (typeof this.field.layout.cellPerOption === 'number') {
+        this.cellPerOption = this.field.layout.cellPerOption
+      }
+      if (typeof this.field.layout.cssClass === 'string') {
+        this.cssClass = this.field.layout.cssClass
+      }
+    }
 
     if (this.field.type === 'chips') {
       this.chipValues = this.form.controls[ this.fieldId ].value

@@ -88,4 +88,35 @@ export type QuickFormField = {
    * Suffix icon tooltip.
    */
   suffixIconTooltip?: string
+
+  /**
+   * Layout properties for field.
+   *
+   * Layout is managed via common-style-attributes (https://common-style-attributes.surge.sh/).
+   */
+  layout?: {
+    /**
+     * CSS class for field.
+     */
+    cssClass?: string
+
+    /**
+     * Number of cell this field should take up, using the flex-cell grid system.
+     */
+    cell?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+    /**
+     * If true, grow field width to use up remaining space in row.
+     */
+    grow?: boolean
+    /**
+     * If true, shrink field width minimum required by the field.
+     */
+    shrink?: boolean
+    /**
+     * Number of cell each option should take up.
+     *
+     * cellPerOption is only applicable to fields that display options (i.e. radio, checkbox).
+     */
+    cellPerOption?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  }
 }

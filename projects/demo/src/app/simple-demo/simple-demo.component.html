@@ -1,6 +1,9 @@
 <div padding>
+    <!--
+    flex-cell and related attributes are features provided by https://common-style-attributes.surge.sh/
+    -->
     <div flex-cell default-cell-6 gutter>
-        <form [formGroup]="form">
+        <form [formGroup]="form" flex-cell gutter default-cell-6>
             <quick-form-field *ngFor="let field of fields"
                               [field]="field"
                               [form]="form">

@@ -11,7 +11,8 @@ export class SimpleDemoComponent implements OnInit {
   form!: FormGroup
   fields: QuickFormField[] = [
     {
-      title: 'Name', validators: [
+      title: 'Name',
+      validators: [
         Validators.minLength(3),
         Validators.maxLength(10)
       ]
@@ -59,7 +60,11 @@ export class SimpleDemoComponent implements OnInit {
     {
       title: 'Front End', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
-      value: 'Angular'
+      value: 'Angular',
+      layout: {
+        cell: 12,
+        cellPerOption: 4
+      }
     },
     {
       title: 'Series/Movies', type: 'chips',
@@ -89,7 +94,10 @@ export class SimpleDemoComponent implements OnInit {
             'Sicario 2: Soldado'
           ]
         }
-      ]
+      ],
+      layout: {
+        cell: 12
+      }
     }
   ]
 

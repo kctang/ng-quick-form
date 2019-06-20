@@ -1,6 +1,6 @@
 {
   "name": "ng-quick-form",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Simplify usage of Angular forms with Angular Material for common use cases.",
   "repository": {
     "type": "git",

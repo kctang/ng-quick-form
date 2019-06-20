@@ -145,7 +145,18 @@
             </label>
             <div flex-cell gutter padding-bottom>
                 <mat-radio-button *ngFor="let option of finalOptions" [value]="option.value"
-                                  cell-2>
+                                  [attr.cell-1]="cellPerOption == 1 ? true : null"
+                                  [attr.cell-2]="cellPerOption == 2 ? true : null"
+                                  [attr.cell-3]="cellPerOption == 3 ? true : null"
+                                  [attr.cell-4]="cellPerOption == 4 ? true : null"
+                                  [attr.cell-5]="cellPerOption == 5 ? true : null"
+                                  [attr.cell-6]="cellPerOption == 6 ? true : null"
+                                  [attr.cell-7]="cellPerOption == 7 ? true : null"
+                                  [attr.cell-8]="cellPerOption == 8 ? true : null"
+                                  [attr.cell-9]="cellPerOption == 9 ? true : null"
+                                  [attr.cell-10]="cellPerOption == 10 ? true : null"
+                                  [attr.cell-11]="cellPerOption == 11 ? true : null"
+                                  [attr.cell-12]="cellPerOption == 12 ? true : null">
                     {{option.label}}
                 </mat-radio-button>
             </div>
@@ -167,7 +178,19 @@
                     *ngFor="let control of getChildControls('__cb-' + fieldId); let i = index">
                 <ng-container [formGroupName]="i">
                     <mat-checkbox formControlName="cb" #cb [value]="getCbOptionValue(i)"
-                                  (change)="doUpdateCb(i, cb.checked)" cell-2>
+                                  (change)="doUpdateCb(i, cb.checked)"
+                                  [attr.cell-1]="cellPerOption == 1 ? true : null"
+                                  [attr.cell-2]="cellPerOption == 2 ? true : null"
+                                  [attr.cell-3]="cellPerOption == 3 ? true : null"
+                                  [attr.cell-4]="cellPerOption == 4 ? true : null"
+                                  [attr.cell-5]="cellPerOption == 5 ? true : null"
+                                  [attr.cell-6]="cellPerOption == 6 ? true : null"
+                                  [attr.cell-7]="cellPerOption == 7 ? true : null"
+                                  [attr.cell-8]="cellPerOption == 8 ? true : null"
+                                  [attr.cell-9]="cellPerOption == 9 ? true : null"
+                                  [attr.cell-10]="cellPerOption == 10 ? true : null"
+                                  [attr.cell-11]="cellPerOption == 11 ? true : null"
+                                  [attr.cell-12]="cellPerOption == 12 ? true : null">
                         {{getCbOptionLabel(i)}}
                     </mat-checkbox>
                 </ng-container>
