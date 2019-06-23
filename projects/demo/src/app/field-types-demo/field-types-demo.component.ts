@@ -41,6 +41,8 @@ export class FieldTypesDemoComponent implements OnInit {
     { title: 'Pet', type: 'separator' },
     {
       title: 'Animal Type', type: 'autocomplete',
+      placeholder: 'Enter value to filter',
+      floatLabel: 'always',
       options: [ 'Fish', 'Insect', 'Mammal' ]
     },
     {
