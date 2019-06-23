@@ -42,6 +42,7 @@
 
     <!--datepicker-->
     <mat-form-field *ngSwitchCase="'datepicker'" width-full>
+        <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [required]="field.required"
                [matDatepicker]="datePicker" [placeholder]="field.title">
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
