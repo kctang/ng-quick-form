@@ -31,6 +31,11 @@ export const setDefaultValues = (fields: QuickFormField[]) => {
       field.type = 'text'
     }
 
+    // set default float label
+    if (!field.floatLabel) {
+      field.floatLabel = 'auto'
+    }
+
     // set default field options
     field.options = resolvedOptions(field.options || [])
     // set default values for field

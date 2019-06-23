@@ -199,6 +199,8 @@ export class FieldTypesDemoComponent implements OnInit {
     { title: 'Pet', type: 'separator' },
     {
       title: 'Animal Type', type: 'autocomplete',
+      placeholder: 'Enter value to filter',
+      floatLabel: 'always',
       options: [ 'Fish', 'Insect', 'Mammal' ]
     },
     {
@@ -311,6 +313,11 @@ export type QuickFormField = {
   type?: QuickFormFieldType
 
   /**
+   * Placeholder for the field. Use title if value not define.
+   */
+  placeholder?: string
+
+  /**
    * Default value for the field when the form is displayed. Optional.
    */
   value?: any | any[]
@@ -366,6 +373,11 @@ export type QuickFormField = {
    * Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
    */
   asyncValidators?: AsyncValidatorFn[]
+
+  /**
+   * Indicate label should always float, never float or float as the user types. Optional. Defaults to auto.
+   */
+  floatLabel: 'always' | 'never' | 'auto'
 
   /**
    * Suffix icon.
