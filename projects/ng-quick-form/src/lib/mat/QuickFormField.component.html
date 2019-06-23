@@ -137,13 +137,11 @@
 
     <!--radio field-->
     <div *ngSwitchCase="'radio'" width-full>
-        <mat-label>{{field.title}}</mat-label>
+        <mat-label>{{field.title}}
+            <mat-icon *ngIf="field.suffixIcon" matSuffix inline="true"
+                      [matTooltip]="field.suffixIconTooltip">
+                {{field.suffixIcon}}</mat-icon></mat-label>
         <mat-radio-group [formControlName]="fieldId" [required]="field.required">
-            <label typography-caption>{{field.title}}
-                <mat-icon *ngIf="field.suffixIcon" matSuffix inline="true"
-                          [matTooltip]="field.suffixIconTooltip">
-                    {{field.suffixIcon}}</mat-icon>
-            </label>
             <div flex-cell gutter padding-bottom>
                 <mat-radio-button *ngFor="let option of finalOptions" [value]="option.value"
                                   [attr.cell-1]="cellPerOption == 1 ? true : null"
