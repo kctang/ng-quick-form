@@ -16,6 +16,7 @@ import xml from 'highlight.js/lib/languages/xml'
 import { FieldTypesDemoComponent } from './field-types-demo/field-types-demo.component'
 import { QuickFormModule } from 'ng-quick-form'
 import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material'
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material'
 
 export function hljsLanguages () {
   return [
@@ -48,7 +49,9 @@ export function hljsLanguages () {
     MatButtonToggleModule
   ],
   providers: [
-    { provide: DateAdapter, useClass: NativeDateAdapter }
+    { provide: DateAdapter, useClass: NativeDateAdapter },
+    // 'legacy' | 'standard' | 'fill' | 'outline'
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'standard' } }
   ],
   bootstrap: [ AppComponent ]
 })
