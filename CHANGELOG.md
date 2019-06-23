@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.15] - 2019-06-23
+
+### Added
+
+- Support placeholder and float label.
+
+### Fixed
+
+- Fix datepicker title.
+- Fix duplicate label for radio.
+
 ## [0.0.14] - 2019-06-20
 
 ### Added
