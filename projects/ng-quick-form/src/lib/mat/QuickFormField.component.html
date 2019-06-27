@@ -215,4 +215,6 @@
     <div *ngSwitchDefault red padding-bottom width-full>
         Unsupported form field type [{{field.type}}]
     </div>
+
+    <div qff-custom-message typography-caption-contrast *ngIf="hasCustomMessage">{{customMessage}}</div>
 </ng-container>

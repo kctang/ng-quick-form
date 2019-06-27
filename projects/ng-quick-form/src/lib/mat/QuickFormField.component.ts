@@ -312,4 +312,12 @@ export class QuickFormFieldComponent implements OnChanges, OnDestroy {
     assert(Array.isArray(anyOptions), `Chip options must be an array [${this.field.id}]`)
     return typeof anyOptions[ 0 ].group === 'string'
   }
+
+  get hasCustomMessage () {
+    return typeof this.field.customMessage === 'function'
+  }
+
+  get customMessage () {
+    return this.field.customMessage!(this.form)
+  }
 }

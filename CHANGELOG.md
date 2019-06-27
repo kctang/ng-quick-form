@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 - ...
 
+## [0.0.16] - 2019-06-27
+
+### Added
+
+- Experimental feature to display custom message below field via `customMessage`.
+
 ## [0.0.15] - 2019-06-23
 
 ### Added
@@ -21,7 +27,7 @@ All notable changes to this project will be documented in this file.
 
 - Manage field layout using properties within `layout`. It can be used to manage size of the cell occupied by the field. Layout is managed via [common-style-attributes](https://common-style-attributes.surge.sh/).
 
-- Assign CSS class(es) to a class via `layout.cssClass`. 
+- Assign CSS class(es) to a class via `layout.cssClass`.
 
 ## [0.0.13] - 2019-06-19
 

@@ -1,4 +1,4 @@
-import { AsyncValidatorFn, ValidatorFn } from '@angular/forms'
+import { AsyncValidatorFn, FormGroup, ValidatorFn } from '@angular/forms'
 import { QuickFormFieldType } from './QuickFormFieldType'
 import { QuickFormFieldOptionDefinition } from './QuickFormFieldOptionDefinition'
 
@@ -129,4 +129,10 @@ export type QuickFormField = {
      */
     cellPerOption?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
   }
+
+  /**
+   * Experimental feature to display custom message below field.
+   * @param formGroup
+   */
+  customMessage?: (formGroup: FormGroup) => string
 }
