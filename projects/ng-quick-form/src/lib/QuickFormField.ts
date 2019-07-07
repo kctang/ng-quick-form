@@ -66,8 +66,15 @@ export type QuickFormField = {
 
   /**
    * Flag to indicate that field input is disabled. Optional. Defaults to false.
+   * Note: Form value will not contains disabled value.
    */
   disabled?: boolean
+
+  /**
+   * Flag to indicate that field input is readonly. Optional. Defaults to false.
+   * Support types: text, autocomplete, datepicker, textarea, chip
+   */
+  readonly?: boolean
 
   /**
    * For 'select' field type, true to allow multiple selection.

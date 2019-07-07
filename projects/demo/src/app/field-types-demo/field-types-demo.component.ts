@@ -22,6 +22,11 @@ export class FieldTypesDemoComponent implements OnInit {
       value: 'Good',
       suffixIcon: 'sentiment_very_satisfied', suffixIconTooltip: 'Happy'
     },
+    {
+      title: 'Cool',
+      value: 'Cool',
+      readonly: true
+    },
     { title: 'Hungry?', type: 'switch' },
     { title: 'Programming Questions', type: 'separator' },
     {

@@ -5,6 +5,7 @@
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId"
+               [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -18,6 +19,7 @@
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId"
+               [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required" [matAutocomplete]="auto">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -36,6 +38,7 @@
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput type="password" [formControlName]="fieldId"
+               [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required">
         <mat-error *ngIf="!form.controls[fieldId].valid">
@@ -47,6 +50,7 @@
     <mat-form-field *ngSwitchCase="'datepicker'" [floatLabel]="field.floatLabel" width-full>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [required]="field.required"
+               [readonly]="field.readonly"
                [matDatepicker]="datePicker"
                [placeholder]="field.placeholder ? field.placeholder : field.title">
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
@@ -62,6 +66,7 @@
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <textarea matInput cdkTextareaAutosize [formControlName]="fieldId"
+                  [readonly]="field.readonly"
                   [placeholder]="field.placeholder ? field.placeholder : field.title"
                   [required]="field.required">
         </textarea>
@@ -86,6 +91,7 @@
             </mat-chip>
             <input #chipInput
                    [placeholder]="field.placeholder ? field.placeholder : field.title"
+                   [readonly]="field.readonly"
                    [formControl]="chipControl"
                    [matAutocomplete]="auto"
                    [matChipInputFor]="chipList"
