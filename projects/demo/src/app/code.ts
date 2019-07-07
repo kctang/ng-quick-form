@@ -180,6 +180,11 @@ export class FieldTypesDemoComponent implements OnInit {
       value: 'Good',
       suffixIcon: 'sentiment_very_satisfied', suffixIconTooltip: 'Happy'
     },
+    {
+      title: 'Cool',
+      value: 'Cool',
+      readonly: true
+    },
     { title: 'Hungry?', type: 'switch' },
     { title: 'Programming Questions', type: 'separator' },
     {
@@ -356,8 +361,15 @@ export type QuickFormField = {
 
   /**
    * Flag to indicate that field input is disabled. Optional. Defaults to false.
+   * Note: Form value will not contains disabled value.
    */
   disabled?: boolean
+
+  /**
+   * Flag to indicate that field input is readonly. Optional. Defaults to false.
+   * Support types: text, autocomplete, datepicker, textarea, chip
+   */
+  readonly?: boolean
 
   /**
    * For 'select' field type, true to allow multiple selection.
@@ -377,7 +389,7 @@ export type QuickFormField = {
   /**
    * Indicate label should always float, never float or float as the user types. Optional. Defaults to auto.
    */
-  floatLabel: 'always' | 'never' | 'auto'
+  floatLabel?: 'always' | 'never' | 'auto'
 
   /**
    * Suffix icon.
