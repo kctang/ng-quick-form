@@ -53,7 +53,7 @@
                [readonly]="field.readonly"
                [matDatepicker]="datePicker"
                [placeholder]="field.placeholder ? field.placeholder : field.title">
-        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-icon matSuffix (click)="datePicker.open()" style="cursor:pointer; color:#777;">today</mat-icon>
         <mat-datepicker #datePicker></mat-datepicker>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
