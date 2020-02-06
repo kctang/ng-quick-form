@@ -20,15 +20,15 @@
       "dom"
     ],
     "paths": {
-//      "ng-quick-form": [
-//        "projects/ng-quick-form/src/public-api"
-//      ]
       "ng-quick-form": [
-        "dist/ng-quick-form"
-      ],
-      "ng-quick-form/*": [
-        "dist/ng-quick-form/*"
+        "projects/ng-quick-form/src/public-api"
       ]
+//      "ng-quick-form": [
+//        "dist/ng-quick-form"
+//      ],
+//      "ng-quick-form/*": [
+//        "dist/ng-quick-form/*"
+//      ]
     }
   }
 }
