@@ -58,9 +58,9 @@ export class QuickFormFieldComponent implements OnChanges, OnDestroy {
 
   separatorKeysCodes: number[] = [ ENTER, COMMA ]
 
-  @ViewChild('chipInput', { static: false })
+  @ViewChild('chipInput')
   chipInput!: ElementRef<HTMLInputElement>
-  @ViewChild('auto', { static: false })
+  @ViewChild('auto')
   matAutocomplete!: MatAutocomplete
   chipControl = new FormControl()
   chipValues: string[] = []
