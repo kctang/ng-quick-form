@@ -15,8 +15,8 @@ import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
 import { FieldTypesDemoComponent } from './field-types-demo/field-types-demo.component'
 import { QuickFormModule } from 'ng-quick-form'
-import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material'
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material'
+import { DateAdapter, MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 export function hljsLanguages () {
   return [
