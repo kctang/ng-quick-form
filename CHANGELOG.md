@@ -1,8 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-- ...
+## [0.1.0] - 2020-02-06
+
+- Update Angular to ~9.0.0-rc.14.
 
 ## [0.0.18] - 2019-07-14
 
@@ -87,7 +88,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Select form field's options which able to filter by another select form field's value. Implements [issue#1](https://github.com/kctang/ng-quick-form/issues/1). 
 
-[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.0.18...HEAD
+[Unreleased]: https://github.com/kctang/ng-quick-form/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/kctang/ng-quick-form/compare/v0.0.17...v0.1.0
 [0.0.18]: https://github.com/kctang/ng-quick-form/compare/v0.0.17...v0.0.18
 [0.0.17]: https://github.com/kctang/ng-quick-form/compare/v0.0.16...v0.0.17
 [0.0.16]: https://github.com/kctang/ng-quick-form/compare/v0.0.15...v0.0.16
