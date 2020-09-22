@@ -97,6 +97,23 @@ export type QuickFormField = {
   floatLabel?: 'always' | 'never' | 'auto'
 
   /**
+   * Hint label.
+   */
+  hintLabel?: string
+
+  /**
+   * Length Indicator.
+   *
+   * Display character count against max length.
+   */
+  lengthIndicator?: {
+    /**
+     * Max length
+     */
+    maxLength: number
+  }
+
+  /**
    * Suffix icon.
    */
   suffixIcon?: string

@@ -52,6 +52,7 @@ export class FieldTypesDemoComponent implements OnInit {
     },
     {
       title: 'Animal', type: 'autocomplete',
+      hintLabel: 'Select Animal Type',
       // options for animal changes based on selected animal type
       optionsFn: (values: any) => {
         switch (values.animalType) {
@@ -65,6 +66,10 @@ export class FieldTypesDemoComponent implements OnInit {
             return [ ]
         }
       }
+    },
+    {
+      title: 'Animal Remark',
+      lengthIndicator: { maxLength: 100 }
     },
     { title: 'Entertainment', type: 'separator' },
     {
