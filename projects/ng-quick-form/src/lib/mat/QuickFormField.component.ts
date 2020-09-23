@@ -268,6 +268,11 @@ export class QuickFormFieldComponent implements OnChanges, OnDestroy {
     this.form.controls[ this.fieldId ].setValue(value)
   }
 
+  getHintLabel () {
+    return this.field.hintLabel ?
+      this.field.hintLabel : (this.field.lengthIndicator ? `Max ${this.field.lengthIndicator.maxLength} characters` : undefined)
+  }
+
   private _filterWithGroups (value: string) {
     // TODO: remove selected values
     const filterValue = value.toLowerCase()

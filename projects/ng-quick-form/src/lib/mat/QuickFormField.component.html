@@ -1,24 +1,27 @@
 <ng-container [formGroup]="form" [ngSwitch]="field.type">
     <!--text field-->
-    <mat-form-field *ngSwitchCase="'text'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'text'" [floatLabel]="field.floatLabel" [hintLabel]="getHintLabel()" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId"
+               #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required">
+        <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
         </mat-error>
     </mat-form-field>
 
     <!--autocomplete-->
-    <mat-form-field *ngSwitchCase="'autocomplete'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'autocomplete'" [floatLabel]="field.floatLabel" [hintLabel]="getHintLabel()" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId"
+               #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required" [matAutocomplete]="auto">
@@ -27,27 +30,30 @@
                 {{option.label}}
             </mat-option>
         </mat-autocomplete>
+        <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
         </mat-error>
     </mat-form-field>
 
     <!--password-->
-    <mat-form-field *ngSwitchCase="'password'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'password'" [floatLabel]="field.floatLabel" [hintLabel]="getHintLabel()" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <input matInput type="password" [formControlName]="fieldId"
+               #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
                [required]="field.required">
+        <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
         </mat-error>
     </mat-form-field>
 
     <!--datepicker-->
-    <mat-form-field *ngSwitchCase="'datepicker'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'datepicker'" [floatLabel]="field.floatLabel" [hintLabel]="field.hintLabel" width-full>
         <mat-label>{{field.title}}</mat-label>
         <input matInput [formControlName]="fieldId" [required]="field.required"
                [readonly]="field.readonly"
@@ -61,22 +67,24 @@
     </mat-form-field>
 
     <!--textarea-->
-    <mat-form-field *ngSwitchCase="'textarea'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'textarea'" [floatLabel]="field.floatLabel" [hintLabel]="getHintLabel()" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
         <textarea matInput cdkTextareaAutosize [formControlName]="fieldId"
+                  #input
                   [readonly]="field.readonly"
                   [placeholder]="field.placeholder ? field.placeholder : field.title"
                   [required]="field.required">
         </textarea>
+        <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
         </mat-error>
     </mat-form-field>
 
     <!--chip-->
-    <mat-form-field *ngSwitchCase="'chips'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'chips'" [floatLabel]="field.floatLabel" [hintLabel]="field.hintLabel" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>
@@ -121,7 +129,7 @@
     </mat-form-field>
 
     <!--select-->
-    <mat-form-field *ngSwitchCase="'select'" [floatLabel]="field.floatLabel" width-full>
+    <mat-form-field *ngSwitchCase="'select'" [floatLabel]="field.floatLabel" [hintLabel]="field.hintLabel" width-full>
         <mat-icon *ngIf="field.suffixIcon" matSuffix [matTooltip]="field.suffixIconTooltip">
             {{field.suffixIcon}}</mat-icon>
         <mat-label>{{field.title}}</mat-label>

@@ -210,6 +210,7 @@ export class FieldTypesDemoComponent implements OnInit {
     },
     {
       title: 'Animal', type: 'autocomplete',
+      hintLabel: 'Select Animal Type',
       // options for animal changes based on selected animal type
       optionsFn: (values: any) => {
         switch (values.animalType) {
@@ -223,6 +224,10 @@ export class FieldTypesDemoComponent implements OnInit {
             return [ ]
         }
       }
+    },
+    {
+      title: 'Animal Remark',
+      lengthIndicator: { maxLength: 100 }
     },
     { title: 'Entertainment', type: 'separator' },
     {
@@ -390,6 +395,23 @@ export type QuickFormField = {
    * Indicate label should always float, never float or float as the user types. Optional. Defaults to auto.
    */
   floatLabel?: 'always' | 'never' | 'auto'
+
+  /**
+   * Hint label.
+   */
+  hintLabel?: string
+
+  /**
+   * Length Indicator.
+   *
+   * Display character count against max length.
+   */
+  lengthIndicator?: {
+    /**
+     * Max length
+     */
+    maxLength: number
+  }
 
   /**
    * Suffix icon.
