@@ -8,7 +8,8 @@
                #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
-               [required]="field.required">
+               [required]="field.required"
+               [maxlength]="field.lengthIndicator && field.lengthIndicator.maxLength > 0 ? field.lengthIndicator.maxLength : null">
         <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
@@ -24,7 +25,8 @@
                #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
-               [required]="field.required" [matAutocomplete]="auto">
+               [required]="field.required" [matAutocomplete]="auto"
+               [maxlength]="field.lengthIndicator && field.lengthIndicator.maxLength > 0 ? field.lengthIndicator.maxLength : null">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
             <mat-option *ngFor="let option of filteredFinalOptions | async" [value]="option.value">
                 {{option.label}}
@@ -45,7 +47,8 @@
                #input
                [readonly]="field.readonly"
                [placeholder]="field.placeholder ? field.placeholder : field.title"
-               [required]="field.required">
+               [required]="field.required"
+               [maxlength]="field.lengthIndicator && field.lengthIndicator.maxLength > 0 ? field.lengthIndicator.maxLength : null">
         <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
             {{errorMessage(form.controls[fieldId])}}
@@ -75,7 +78,8 @@
                   #input
                   [readonly]="field.readonly"
                   [placeholder]="field.placeholder ? field.placeholder : field.title"
-                  [required]="field.required">
+                  [required]="field.required"
+                  [maxlength]="field.lengthIndicator && field.lengthIndicator.maxLength > 0 ? field.lengthIndicator.maxLength : null">
         </textarea>
         <mat-hint *ngIf="field.lengthIndicator" align="end">{{input.value?.length || 0}}/{{field.lengthIndicator.maxLength}}</mat-hint>
         <mat-error *ngIf="!form.controls[fieldId].valid">
