@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2020-10-12
+
+- Set Angular version minimum to 9 and remove upper version limit.
+
 ## [0.1.2] - 2020-09-23
 
 - Support length indicator & hint label.
